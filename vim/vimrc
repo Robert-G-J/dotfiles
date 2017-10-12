@@ -1,6 +1,29 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"============================================================
+"                     ~My vimrc~
+"============================================================
+"
+" Author:       Robert Jones [http://github.com/robert-g-j]
+" Source:       https://github.com/robert-g-j/dotfiles
+"
+"============================================================
+"                     ~Mappings~
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap p p`[v`]=
+
+" Easy access to the start of the line
+nmap 0 ^<cr>
+" Set Leader to be the space-bar
+let mapleader = "\<Space>"
+
+" New tab and edit vimrc
+nmap <leader>vi :tabedit $MYVIMRC<cr>
+" Source (reload) the vimrc
+nmap <leader>so :source $MYVIMRC<cr>
+
+" Save file on escaping insert mode
+imap <esc> <esc>:w<cr>
+
+"============================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -68,6 +91,4 @@ set shiftwidth=2          " indent/outdent by 2 columns
 set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
-set nowrap                " don't wrap text
-"""" Mappings """"
-nnoremap p p`[v`]=
+"set nowrap                " don't wrap text
