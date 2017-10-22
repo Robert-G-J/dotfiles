@@ -11,7 +11,7 @@
 nnoremap p p`[v`]=
 
 " Easy access to the start of the line
-nmap 0 ^<cr>
+nmap 0 ^
 " Set Leader to be the space-bar
 let mapleader = "\<Space>"
 
@@ -20,11 +20,13 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 " Source (reload) the vimrc
 nmap <leader>so :source $MYVIMRC<cr>
 
+"Run RSpec 
+nmap <leader>t :!rspec<cr>
+
 " Save file on escaping insert mode
 imap <esc> <esc>:w<cr>
 
 "============================================================
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -46,6 +48,9 @@ Plugin 'kien/ctrlp.vim'     "Fuzzy Search
 Plugin 'tpope/vim-surround' "parentheses support
 Plugin 'altercation/vim-colors-solarized' "easy on the eye 
 Plugin 'w0rp/ale'           "async linting
+Plugin 'pangloss/vim-javascript' "syntax highlighting and improved indentation
+Plugin 'mxw/vim-jsx' "Syntax highlighting and indenting for JSX
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -77,18 +82,22 @@ colorscheme solarized
 if has('unnamedplus')
 	set clipboard=unnamed,unnamedplus
 endif
+set nocompatible          " be iMproved, required
 set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
+set nobackup              " Stops creating swp files (thank goodness)
 set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
 set ruler                 " Always show info along bottom.
 set autoindent            " auto-indent
 set tabstop=2             " tab spacing
+set scrolloff=4           " keep at least 4 lines below the cursor
 set softtabstop=2         " unify
 set shiftwidth=2          " indent/outdent by 2 columns
 set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
+set secure                " limit what modelines and autocmds can do
 set smarttab              " use tabs at the start of a line, spaces elsewhere
-"set nowrap                " don't wrap text
+"set nowrap               " don't wrap text
