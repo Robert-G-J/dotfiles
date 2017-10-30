@@ -6,6 +6,10 @@
 " Source:       https://github.com/robert-g-j/dotfiles
 "
 "============================================================
+"                     ~Top Settings~
+                     
+"filetype plugin indent on    " required
+"============================================================
 "                     ~Mappings~
 
 nnoremap p p`[v`]=
@@ -20,65 +24,51 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 " Source (reload) the vimrc
 nmap <leader>so :source $MYVIMRC<cr>
 
+"Open NERDTree
+nmap <leader>nt :NERDTree<cr>
+
 "Run RSpec 
 nmap <leader>t :!rspec<cr>
 
 " Save file on escaping insert mode
 imap <esc> <esc>:w<cr>
+"============================================================
+"                   ~Plugin Config~
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 "============================================================
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-" alternatively, pass a path where Vundle should install plugins
-
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'myusuf3/numbers.vim' "Relative line numbers
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive' "Git wrapper
-Plugin 'tpope/vim-sensible' "Universal, agreeable defaults
-Plugin 'kien/ctrlp.vim'     "Fuzzy Search
-Plugin 'tpope/vim-surround' "parentheses support
-Plugin 'altercation/vim-colors-solarized' "easy on the eye 
-Plugin 'w0rp/ale'           "async linting
-Plugin 'pangloss/vim-javascript' "syntax highlighting and improved indentation
-Plugin 'mxw/vim-jsx' "Syntax highlighting and indenting for JSX
+Plug 'myusuf3/numbers.vim'      "Relative line numbers
+Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+Plug 'bling/vim-airline'        "The fancy strip at the bottom
+Plug 'tpope/vim-fugitive'       "Git wrapper
+Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
+Plug 'kien/ctrlp.vim'           "Fuzzy Search
+Plug 'tpope/vim-surround'       "parentheses support
+Plug 'altercation/vim-colors-solarized' "easy on the eye 
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
+" Javascript
+Plug 'w0rp/ale'                 "async linting
+Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
+Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
+Plug 'othree/javascript-libraries-syntax.vim' 
+
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" 
+Plug 'git://git.wincent.com/command-t.git'
+call plug#end()
+
 " Put your non-Plugin stuff after this line
 syntax enable
 set background=dark
 colorscheme solarized
-"Use system clipboard.
 
+"Use system clipboard.
 if has('unnamedplus')
 	set clipboard=unnamed,unnamedplus
 endif
@@ -100,4 +90,3 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set secure                " limit what modelines and autocmds can do
 set smarttab              " use tabs at the start of a line, spaces elsewhere
-"set nowrap               " don't wrap text
