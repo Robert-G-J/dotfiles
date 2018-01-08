@@ -30,6 +30,10 @@ nmap <leader>nt :NERDTree<cr>
 "Run RSpec 
 nmap <leader>t :!rspec<cr>
 
+"Move up and down by visible lines if current line is wrapping
+nmap j gj
+nmap k gk
+
 " Save file on escaping insert mode
 imap <esc> <esc>:w<cr>
 "============================================================
@@ -39,6 +43,12 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 "============================================================
 filetype off                  " required
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
@@ -52,6 +62,7 @@ Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
 Plug 'kien/ctrlp.vim'           "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
 Plug 'altercation/vim-colors-solarized' "easy on the eye 
+Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
@@ -77,6 +88,8 @@ set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
 set nobackup              " Stops creating swp files (thank goodness)
+set nowritebackup
+set noswapfile
 set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
@@ -90,3 +103,4 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set secure                " limit what modelines and autocmds can do
 set smarttab              " use tabs at the start of a line, spaces elsewhere
+set wrap                  " soft wrap 
