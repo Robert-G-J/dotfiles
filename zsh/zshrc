@@ -5,14 +5,17 @@ alias brewup="brew update && brew upgrade && brew cleanup"
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
 
+# rbenv automation
+eval "$(rbenv init -)"
+
 # plugins
 source ~/.zplug/init.zsh
 
 zplug 'mafredri/zsh-async'
-# zplug 'sindresorhus/pure'
+zplug 'sindresorhus/pure'
 zplug "zsh-users/zsh-completions" 
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "adc17/pure-red-stars", as:theme
+# zplug "adc17/pure-red-stars", as:theme
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -28,3 +31,13 @@ source ~/dotfiles/zsh/omz-git.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Color settings
+
+# makes color constants available
+autoload -U colors
+colors
+
+# enable coloured output from ls, etc on FreeBSD-based systems
+export CLICOLOR=1
+
