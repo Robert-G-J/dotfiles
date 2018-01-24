@@ -27,8 +27,8 @@ nmap <leader>so :source $MYVIMRC<cr>
 "Open NERDTree
 nmap <leader>nt :NERDTree<cr>
 
-"Run RSpec 
-nmap <leader>t :!rspec<cr>
+"Run tests 
+nmap <leader>t :!npm test<cr>
 
 "Move up and down by visible lines if current line is wrapping
 nmap j gj
@@ -40,7 +40,12 @@ imap <esc> <esc>:w<cr>
 "                   ~Plugin Config~
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['ruby'] = [ 'prettier']
+let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
+let g:ale_fix_on_save = 1 " runs prettier on save
+let NERDTreeShowHidden = 1 "shows hidden files as default
 "============================================================
 filetype off                  " required
 
@@ -56,12 +61,13 @@ call plug#begin('~/.vim/plugged')
 " plugin on GitHub repo
 Plug 'myusuf3/numbers.vim'      "Relative line numbers
 Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+Plug 'scrooloose/nerdcommenter'  "Comment functions
 Plug 'bling/vim-airline'        "The fancy strip at the bottom
 Plug 'tpope/vim-fugitive'       "Git wrapper
 Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
 Plug 'kien/ctrlp.vim'           "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
-Plug 'altercation/vim-colors-solarized' "easy on the eye 
+Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 
 " Javascript
