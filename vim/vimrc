@@ -46,6 +46,7 @@ let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:ale_fix_on_save = 1 " runs prettier on save
 let NERDTreeShowHidden = 1 "shows hidden files as default
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores 
 "============================================================
 filetype off                  " required
 
@@ -59,6 +60,9 @@ call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+Plug 'tpope/vim-fireplace' "Repl support
+Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
+Plug 'guns/vim-clojure-static' "Clojure runtime files
 Plug 'myusuf3/numbers.vim'      "Relative line numbers
 Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
 Plug 'scrooloose/nerdcommenter'  "Comment functions
