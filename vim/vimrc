@@ -73,6 +73,7 @@ Plug 'kien/ctrlp.vim'           "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
+Plug '/usr/local/opt/fzf'       "fzf fuzzy search 
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
