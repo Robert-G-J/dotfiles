@@ -74,6 +74,7 @@ Plug 'tpope/vim-surround'       "parentheses support
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 Plug '/usr/local/opt/fzf'       "fzf fuzzy search 
+Plug 'junegunn/fzf.vim'
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
