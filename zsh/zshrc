@@ -16,7 +16,7 @@ case $HIST_STAMPS in
   "mm/dd/yyyy") alias history='fc -fl 1' ;;
   "dd.mm.yyyy") alias history='fc -El 1' ;;
   "yyyy-mm-dd") alias history='fc -il 1' ;;
-  *) alias history='fc -l 1' 
+  *) alias history='fc -l 1'
 esac
 
 setopt append_history
@@ -33,7 +33,7 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 # aliases
-alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"' 
+alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"'
 alias brewup="brew update && brew upgrade && brew cleanup"
 alias gs='git status'
 alias ga='git add'
@@ -54,7 +54,7 @@ source $(brew --prefix nvm)/nvm.sh
 
 zplug 'mafredri/zsh-async'
 zplug 'sindresorhus/pure'
-zplug "zsh-users/zsh-completions" 
+zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 # zplug "adc17/pure-red-stars", as:theme
 
