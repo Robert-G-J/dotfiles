@@ -1,0 +1,120 @@
+"============================================================
+"                     ~My vimrc~
+"============================================================
+"
+" Author:       Robert Jones [http://github.com/robert-g-j]
+" Source:       https://github.com/robert-g-j/dotfiles
+"
+"============================================================
+"                     ~Top Settings~
+                     
+"filetype plugin indent on    " required
+"============================================================
+"                     ~Mappings~
+
+nnoremap p p`[v`]=
+
+" Easy access to the start of the line
+nmap 0 ^
+" Set Leader to be the space-bar
+let mapleader = "\<Space>"
+
+" New tab and edit vimrc
+nmap <leader>vi :tabedit $MYVIMRC<cr>
+" Source (reload) the vimrc
+nmap <leader>so :source $MYVIMRC<cr>
+
+"Open NERDTree
+nmap <leader>nt :NERDTree<cr>
+
+"Run tests 
+nmap <leader>t :!npm test<cr>
+
+"Move up and down by visible lines if current line is wrapping
+nmap j gj
+nmap k gk
+
+" Save file on escaping insert mode
+imap <esc> <esc>:w<cr>
+"============================================================
+"                   ~Plugin Config~
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['ruby'] = [ 'prettier']
+let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
+let g:ale_fix_on_save = 1 " runs prettier on save
+let NERDTreeShowHidden = 1 "shows hidden files as default
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores 
+"============================================================
+filetype off                  " required
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plug 'tpope/vim-fireplace' "Repl support
+Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
+Plug 'guns/vim-clojure-static' "Clojure runtime files
+Plug 'myusuf3/numbers.vim'      "Relative line numbers
+Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+Plug 'scrooloose/nerdcommenter'  "Comment functions
+Plug 'bling/vim-airline'        "The fancy strip at the bottom
+Plug 'tpope/vim-fugitive'       "Git wrapper
+Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
+Plug 'kien/ctrlp.vim'           "Fuzzy Search
+Plug 'tpope/vim-surround'       "parentheses support
+Plug 'altercation/vim-colors-solarized' "easy on the eye
+Plug 'jiangmiao/auto-pairs'     "adds closing brackets
+Plug '/usr/local/opt/fzf'       "fzf fuzzy search 
+Plug 'junegunn/fzf.vim'
+
+" Javascript
+Plug 'w0rp/ale'                 "async linting
+Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
+Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
+Plug 'othree/javascript-libraries-syntax.vim' 
+Plug 'posva/vim-vue'            "syntax highlighting for vue
+
+" Git plugin not hosted on GitHub
+Plug 'git://git.wincent.com/command-t.git'
+call plug#end()
+
+" Put your non-Plugin stuff after this line
+syntax enable
+set background=dark
+colorscheme solarized
+
+"Use system clipboard.
+if has('unnamedplus')
+	set clipboard=unnamed,unnamedplus
+endif
+set nocompatible          " be iMproved, required
+set t_Co=256              " enable 256-color mode.
+set number                " show line numbers
+set laststatus=2          " last window always has a statusline
+set nobackup              " Stops creating swp files (thank goodness)
+set nowritebackup
+set noswapfile
+set nohlsearch            " Don't continue to highlight searched phrases.
+set incsearch             " But do highlight as you type your search.
+set ignorecase            " Make searches case-insensitive.
+set rtp+=/usr/local/opt/fzf " Gets fzf running
+set ruler                 " Always show info along bottom.
+set autoindent            " auto-indent
+set tabstop=2             " tab spacing
+set scrolloff=4           " keep at least 4 lines below the cursor
+set softtabstop=2         " unify
+set shiftwidth=2          " indent/outdent by 2 columns
+set shiftround            " always indent/outdent to the nearest tabstop
+set expandtab             " use spaces instead of tabs
+set secure                " limit what modelines and autocmds can do
+set smarttab              " use tabs at the start of a line, spaces elsewhere
+set wrap                  " soft wrap 
