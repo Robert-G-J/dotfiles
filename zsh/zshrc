@@ -38,9 +38,10 @@ alias brewup="brew update && brew upgrade && brew cleanup"
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
-alias gcm-'git commit -m'
+alias gcm='git commit -m'
 alias zp='vim ~/.zshrc'
 alias zpr='source ~/.zshrc'
+alias goto='git checkout'
 
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
