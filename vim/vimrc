@@ -75,6 +75,7 @@ Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 Plug '/usr/local/opt/fzf'       "fzf fuzzy search
 Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'          "emmet support
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
