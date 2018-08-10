@@ -7,7 +7,7 @@
 "
 "============================================================
 "                     ~Top Settings~
-                     
+
 "filetype plugin indent on    " required
 "============================================================
 "                     ~Mappings~
@@ -27,7 +27,7 @@ nmap <leader>so :source $MYVIMRC<cr>
 "Open NERDTree
 nmap <leader>nt :NERDTree<cr>
 
-"Run tests 
+"Run tests
 nmap <leader>t :!npm test<cr>
 
 "Move up and down by visible lines if current line is wrapping
@@ -46,7 +46,7 @@ let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:ale_fix_on_save = 1 " runs prettier on save
 let NERDTreeShowHidden = 1 "shows hidden files as default
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores
 "============================================================
 filetype off                  " required
 
@@ -73,14 +73,15 @@ Plug 'kien/ctrlp.vim'           "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
-Plug '/usr/local/opt/fzf'       "fzf fuzzy search 
+Plug '/usr/local/opt/fzf'       "fzf fuzzy search
 Plug 'junegunn/fzf.vim'
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
 Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
 Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
-Plug 'othree/javascript-libraries-syntax.vim' 
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'posva/vim-vue'            "syntax highlighting for vue
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
@@ -105,6 +106,7 @@ set noswapfile
 set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
+set rtp+=/usr/local/opt/fzf " Gets fzf running
 set ruler                 " Always show info along bottom.
 set autoindent            " auto-indent
 set tabstop=2             " tab spacing
@@ -115,4 +117,4 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set secure                " limit what modelines and autocmds can do
 set smarttab              " use tabs at the start of a line, spaces elsewhere
-set wrap                  " soft wrap 
+set wrap                  " soft wrap
