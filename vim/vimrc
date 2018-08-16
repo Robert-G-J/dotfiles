@@ -36,6 +36,9 @@ nmap k gk
 
 " Save file on escaping insert mode
 imap <esc> <esc>:w<cr>
+" Run Prettier on demand
+nnoremap gp :silent %!prettier<cr>
+"
 "============================================================
 "                   ~Plugin Config~
 
@@ -44,9 +47,15 @@ let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
-let g:ale_fix_on_save = 1 " runs prettier on save
+"let g:ale_fix_on_save = 1 " runs prettier on save
 let NERDTreeShowHidden = 1 "shows hidden files as default
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores 
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
 "============================================================
 filetype off                  " required
 
@@ -75,6 +84,7 @@ Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 Plug '/usr/local/opt/fzf'       "fzf fuzzy search 
 Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'          "emmet support for writing HTML
 
 " Javascript
 Plug 'w0rp/ale'                 "async linting
