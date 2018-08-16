@@ -25,7 +25,7 @@ brew 'tree'
 brew 'vim'
 brew 'watchman'
 brew 'wget'
-brew 'yarn'
+brew 'yarn' --without-node
 brew 'z'
 brew 'zsh'
 
