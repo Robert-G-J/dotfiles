@@ -49,6 +49,7 @@ alias goto='git checkout'
 
 # rbenv automation
 eval "$(rbenv init -)"
+eval $(thefuck --alias)
 
 # plugins
 source ~/.zplug/init.zsh
