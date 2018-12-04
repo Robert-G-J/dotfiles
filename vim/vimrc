@@ -80,6 +80,9 @@ Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'posva/vim-vue'            "syntax highlighting for vue
 
+" Template Highlighting
+Plug 'digitaltoad/vim-pug'
+
 " Themes
 Plug 'w0ng/vim-hybrid'
 
