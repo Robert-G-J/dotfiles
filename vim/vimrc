@@ -25,7 +25,7 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-nmap <leader>nt :NERDTree<cr>
+" nmap <leader>nt :NERDTree<cr>
 
 "Run tests
 nmap <leader>t :!npm test<cr>
@@ -47,9 +47,11 @@ let g:ale_fixers = {}
 let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:ale_fix_on_save = 1 " runs prettier on save
-let NERDTreeShowHidden = 1 "shows hidden files as default
+"let NERDTreeShowHidden = 1 "shows hidden files as default
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
+let g:used_javascript_libs = 'angularjs, angularui'
+
 "============================================================
 filetype off                  " required
 
@@ -62,9 +64,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fireplace' "Repl support
 Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
-Plug 'guns/vim-clojure-static' "Clojure runtime files
 Plug 'myusuf3/numbers.vim'      "Relative line numbers
-Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+"Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
 Plug 'scrooloose/nerdcommenter'  "Comment functions
 Plug 'bling/vim-airline'        "The fancy strip at the bottom
 Plug 'tpope/vim-fugitive'       "Git wrapper
@@ -77,12 +78,15 @@ Plug '/usr/local/opt/fzf'       "fzf fuzzy search
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'          "emmet support
 
+" Clojure
+Plug 'guns/vim-clojure-static' "Clojure runtime files
+
 " Javascript
 Plug 'w0rp/ale'                 "async linting
 Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
 Plug 'jelera/vim-javascript-syntax' "syntax highlight
 Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
-Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
 Plug 'posva/vim-vue'            "syntax highlighting for vue
 
 " Template Highlighting
@@ -92,7 +96,10 @@ Plug 'digitaltoad/vim-pug'
 Plug 'w0ng/vim-hybrid'
 
 " Git plugin not hosted on GitHub
-Plug 'git://git.wincent.com/command-t.git'
+Plug 'wincent/command-t', {
+ \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+ \ }
+"Plug 'git://git.wincent.com/command-t.git'
 call plug#end()
 
 " Put your non-Plugin stuff after this line
