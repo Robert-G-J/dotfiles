@@ -28,7 +28,7 @@ nmap <leader>so :source $MYVIMRC<cr>
 " nmap <leader>nt :NERDTree<cr>
 
 "Run tests
-nmap <leader>t :!npm test<cr>
+"nmap <leader>t :!npm test<cr>
 
 "Move up and down by visible lines if current line is wrapping
 nmap j gj
@@ -70,7 +70,7 @@ Plug 'scrooloose/nerdcommenter'  "Comment functions
 Plug 'bling/vim-airline'        "The fancy strip at the bottom
 Plug 'tpope/vim-fugitive'       "Git wrapper
 Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
-Plug 'kien/ctrlp.vim'           "Fuzzy Search
+Plug 'ctrlpvim/ctrlp.vim'           "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
@@ -88,6 +88,9 @@ Plug 'jelera/vim-javascript-syntax' "syntax highlight
 Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
 Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
 Plug 'posva/vim-vue'            "syntax highlighting for vue
+
+" Tmux Integration
+Plug 'christoomey/vim-tmux-navigator' "allow sensible pane switching from vim panes to tmux panes
 
 " Template Highlighting
 Plug 'digitaltoad/vim-pug'
@@ -111,6 +114,7 @@ colorscheme hybrid
 if has('unnamedplus')
 	set clipboard=unnamed,unnamedplus
 endif
+set mouse=n               " mouse scroll in normal mode 
 set nocompatible          " be iMproved, required
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
