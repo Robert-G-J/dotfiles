@@ -25,7 +25,7 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-" nmap <leader>nt :NERDTree<cr>
+nmap <leader>nt :NERDTree<cr>
 
 "Run tests
 "nmap <leader>t :!npm test<cr>
@@ -47,7 +47,7 @@ let g:ale_fixers = {}
 let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:ale_fix_on_save = 1 " runs prettier on save
-"let NERDTreeShowHidden = 1 "shows hidden files as default
+let NERDTreeShowHidden = 1 "shows hidden files as default
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
 let g:used_javascript_libs = 'angularjs, angularui'
@@ -65,7 +65,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fireplace' "Repl support
 Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
 Plug 'myusuf3/numbers.vim'      "Relative line numbers
-"Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
 Plug 'scrooloose/nerdcommenter'  "Comment functions
 Plug 'bling/vim-airline'        "The fancy strip at the bottom
 Plug 'tpope/vim-fugitive'       "Git wrapper
@@ -99,9 +99,9 @@ Plug 'digitaltoad/vim-pug'
 Plug 'w0ng/vim-hybrid'
 
 " Git plugin not hosted on GitHub
-Plug 'wincent/command-t', {
- \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
- \ }
+"Plug 'wincent/command-t', {
+" \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+" \ }
 "Plug 'git://git.wincent.com/command-t.git'
 call plug#end()
 
