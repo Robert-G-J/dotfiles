@@ -27,6 +27,9 @@ nmap <leader>so :source $MYVIMRC<cr>
 "Open NERDTree
 nmap <leader>nt :NERDTree<cr>
 
+" Paste last yank
+nmap <leader>p "0P
+
 "Run tests
 "nmap <leader>t :!npm test<cr>
 
@@ -124,6 +127,7 @@ set noswapfile
 set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
+set pastetoggle=<F9>      " Using allows paste without auto indent
 set rtp+=/usr/local/opt/fzf " Gets fzf running
 set ruler                 " Always show info along bottom.
 set autoindent            " auto-indent
