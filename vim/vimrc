@@ -25,7 +25,7 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-nmap <leader>nt :NERDTree<cr>
+nmap <leader>nt :NERDTreeFind<cr>
 
 " Paste last yank
 nmap <leader>p "0P
