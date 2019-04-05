@@ -25,7 +25,11 @@ nmap <leader>vi :tabedit $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-nmap <leader>nt :NERDTreeFind<cr>
+nmap <leader>nt :NERDTree<cr>
+nmap <leader>nf :NERDTreeFind<cr>
+
+"ALE fix file
+nmap <leader>sa :ALEFix<cr>
 
 " Paste last yank
 nmap <leader>p "0P
@@ -42,18 +46,23 @@ imap jj <Esc>
 
 " Save file on escaping insert mode
 imap <esc> <esc>:w<cr>
+
 "============================================================
 "                   ~Plugin Config~
-"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:used_javascript_libs = 'angularjs, angularui'
+" ALE
 let g:ale_fixers = {}
-"let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier', 'prettier-standard', 'standard', 'eslint']
 let g:ale_fixers['ruby'] = [ 'prettier']
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
-let g:ale_fix_on_save = 1 " runs prettier on save
+let g:ale_fix_on_save = 0 " runs prettier on save
+" NERDTree
 let NERDTreeShowHidden = 1 "shows hidden files as default
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git' "ctrlp ignores
+" CtrlP
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|next' "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
-let g:used_javascript_libs = 'angularjs, angularui'
+let g:ctrlp_show_hidden = 1 "shows hidden files
 
 "============================================================
 filetype off                  " required
