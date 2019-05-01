@@ -10,6 +10,7 @@ cask 'java'
 
 # install desired scripts
 brew 'awscli'
+brew 'circleci'
 brew 'clojure'
 brew 'emacs'
 brew 'fzf'
