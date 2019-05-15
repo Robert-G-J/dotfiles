@@ -109,6 +109,7 @@ Plug 'digitaltoad/vim-pug'
 
 " Themes
 Plug 'w0ng/vim-hybrid'
+Plug 'reedes/vim-colors-pencil'
 
 " Git plugin not hosted on GitHub
 "Plug 'wincent/command-t', {
