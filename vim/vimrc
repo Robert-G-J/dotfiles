@@ -85,8 +85,9 @@ Plug 'scrooloose/nerdcommenter'  "Comment functions
 Plug 'bling/vim-airline'        "The fancy strip at the bottom
 Plug 'tpope/vim-fugitive'       "Git wrapper
 Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
-Plug 'ctrlpvim/ctrlp.vim'           "Fuzzy Search
+Plug 'ctrlpvim/ctrlp.vim'       "Fuzzy Search
 Plug 'tpope/vim-surround'       "parentheses support
+Plug 'tpope/vim-repeat'         "repeats plugin actions with .
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 Plug 'jiangmiao/auto-pairs'     "adds closing brackets
 Plug '/usr/local/opt/fzf'       "fzf fuzzy search
