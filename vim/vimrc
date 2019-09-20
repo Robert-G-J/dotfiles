@@ -105,6 +105,12 @@ Plug 'mattn/emmet-vim'          "emmet support
 " Clojure
 Plug 'guns/vim-clojure-static' "Clojure runtime files
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
+
 " Javascript
 Plug 'w0rp/ale'                 "async linting
 Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
