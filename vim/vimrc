@@ -52,9 +52,14 @@ imap <esc> <esc>:w<cr>
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:used_javascript_libs = 'angularjs, angularui'
 " ALE
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier', 'prettier-standard', 'standard', 'eslint']
-let g:ale_fixers['ruby'] = [ 'prettier']
+let g:ale_fixers = {
+      \  'javascript': ['prettier', 'prettier-standard', 'standard', 'eslint'],
+      \  'ruby': ['prettier'],
+      \  'rust': ['rustfmt'],
+      \  'go': ['gofmt', 'goimports'],
+      \  'css': ['prettier'],
+      \  'jade': ['prettier'],
+      \}
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:ale_fix_on_save = 0 " runs prettier on save
 " NERDTree
