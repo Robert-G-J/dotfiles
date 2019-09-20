@@ -143,7 +143,7 @@ colorscheme hybrid
 
 "Use system clipboard.
 if has('unnamedplus')
-	set clipboard=unnamed,unnamedplus
+  set clipboard=unnamed,unnamedplus
 endif
 set mouse=n               " mouse scroll in normal mode 
 set nocompatible          " be iMproved, required
