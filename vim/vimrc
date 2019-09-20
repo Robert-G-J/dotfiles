@@ -71,6 +71,9 @@ let g:ctrlp_custom_ignore = {
   \ } "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_show_hidden = 1 "shows hidden files
+"Emmet
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = { 'javascript.jsx' : { 'extends' : 'jsx', } }
 
 "============================================================
 filetype off                  " required
