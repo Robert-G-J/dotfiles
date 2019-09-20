@@ -31,6 +31,7 @@ setopt share_history # share command history data
 # load env variables
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
 export ANSIBLE_HOST_KEY_CHECKING=False
+export GOPATH=/Users/robertjones/Code/go
 
 # aliases
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"'
