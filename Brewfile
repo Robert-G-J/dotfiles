@@ -40,6 +40,7 @@ brew 'yarn'
 brew 'z'
 brew 'zsh'
 
+cask 'the-unarchiver'
 cask 'caffeine'
 cask 'docker'
 cask 'docker-toolbox'
