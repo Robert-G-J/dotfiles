@@ -66,7 +66,7 @@ let g:ale_fix_on_save = 0 " runs prettier on save
 let NERDTreeShowHidden = 1 "shows hidden files as default
 " CtrlP
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|next|node_modules)$',
+  \ 'dir':  '\v[\/](node_modules)|\.(git|hg|svn|next|node_modules)$',
   \ 'file': '\v\.(exe|so|dll|DS_Store)$',
   \ } "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
