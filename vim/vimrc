@@ -61,6 +61,7 @@ let g:ale_fixers = {
       \  'jade': ['prettier'],
       \}
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
+let g:airline_section_b = '' " Hide the branch info in airline
 let g:ale_fix_on_save = 0 " runs prettier on save
 " NERDTree
 let NERDTreeShowHidden = 1 "shows hidden files as default
