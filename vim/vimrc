@@ -9,6 +9,7 @@
 "                     ~Top Settings~
 
 filetype plugin indent on    " required
+runtime macros/matchit.vim   "uses macro to jump between html/xml tags
 "============================================================
 "                     ~Mappings~
 
