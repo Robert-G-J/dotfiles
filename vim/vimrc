@@ -1,5 +1,5 @@
 "============================================================
-"                     ~My vimrc~
+"                     ~vimrc~
 "============================================================
 "
 " Author:       Robert Jones [http://github.com/robert-g-j]
@@ -8,8 +8,9 @@
 "============================================================
 "                     ~Top Settings~
 
-filetype plugin indent on    " required
+filetype plugin indent on    "required
 runtime macros/matchit.vim   "uses macro to jump between html/xml tags
+au BufNewFile,BufRead *.ejs set filetype=html "use html syntax highlighting for EJS
 "============================================================
 "                     ~Mappings~
 
@@ -60,6 +61,7 @@ let g:ale_fixers = {
       \  'go': ['gofmt', 'goimports'],
       \  'css': ['prettier'],
       \  'jade': ['prettier'],
+      \  'html': ['html-beautify'],
       \}
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:airline_section_b = '' " Hide the branch info in airline
@@ -87,6 +89,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'lumiliet/vim-twig' "twig template support
 Plug 'tpope/vim-fireplace' "Repl support
 Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
 Plug 'myusuf3/numbers.vim'      "Relative line numbers
