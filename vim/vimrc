@@ -62,6 +62,7 @@ let g:ale_fixers = {
       \  'css': ['prettier'],
       \  'jade': ['prettier'],
       \  'html': ['html-beautify'],
+      \  'json': ['prettier'],
       \}
 let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
 let g:airline_section_b = '' " Hide the branch info in airline
