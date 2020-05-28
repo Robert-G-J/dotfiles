@@ -45,7 +45,7 @@ alias goto='git checkout'
 
 # plugins
 export ZPLUG_HOME=/usr/local/opt/zplug
-source ~/$ZPLUG_HOME/init.zsh
+source $ZPLUG_HOME/init.zsh
 source $(brew --prefix nvm)/nvm.sh
 
 zplug 'mafredri/zsh-async'
