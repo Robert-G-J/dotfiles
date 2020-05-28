@@ -1,7 +1,11 @@
 cask_args appdir: '/Applications'
 
-tap 'caskroom/cask'
-tap 'caskroom/fonts'
+tap 'homebrew/bundle'
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'homebrew/core'
+tap 'homebrew/services'
+tap 'mas-cli/tap'
 # tap 'heroku/brew'
 tap 'thoughtbot/formulae'
 
