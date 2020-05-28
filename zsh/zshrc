@@ -1,8 +1,3 @@
-# checks and installs zplug
-if [[ ! -d ~/.zplug ]];then
-    git clone https://github.com/b4b4r07/zplug ~/.zplug
-fi
-
 ## Command history configuration
 if [ -z "$HISTFILE"  ]; then
     HISTFILE=$HOME/.zsh_history
@@ -29,9 +24,9 @@ setopt inc_append_history
 setopt share_history # share command history data
 
 # load env variables
-export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
-export ANSIBLE_HOST_KEY_CHECKING=False
-export GOPATH=/Users/robertjones/Code/go
+# export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
+# export ANSIBLE_HOST_KEY_CHECKING=False
+# export GOPATH=/Users/robertjones/Code/go
 
 # aliases
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"'
@@ -47,10 +42,6 @@ alias goto='git checkout'
 
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
-
-# rbenv automation
-eval "$(rbenv init -)"
-eval $(thefuck --alias)
 
 # plugins
 source ~/.zplug/init.zsh

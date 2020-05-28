@@ -39,6 +39,7 @@ brew 'watchman'
 brew 'wget'
 brew 'yarn'
 brew 'z'
+brew 'zplug'
 brew 'zsh'
 
 cask 'the-unarchiver'

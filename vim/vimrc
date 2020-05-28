@@ -37,7 +37,7 @@ nmap <leader>sa :ALEFix<cr>
 nmap <leader>p "0P
 
 "Run tests
-"nmap <leader>t :!npm test<cr>
+nmap <leader>t :!yarn test<cr>
 
 "Move up and down by visible lines if current line is wrapping
 nmap j gj
