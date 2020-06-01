@@ -1,3 +1,0 @@
-git config --global user.name "Robert Jones"
-git config --global user.email EMAIL_REDACTED
-git config --global core.editor vim
