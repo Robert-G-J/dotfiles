@@ -25,6 +25,7 @@ for file in $files; do
   echo "Moving existing dotfiles from ~ to $olddir"
   mv ~/.$file ~/dotfiles_old/
   echo "Creating symlink to $file in home directory"
+  # this doesn't link correctly to the file, but to the root
   ln -s $dir/$file ~/.$file
 done
 
