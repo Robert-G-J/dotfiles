@@ -1,8 +1,8 @@
 [user]
+  name = Robert Jones
 	email = 22344413+Robert-G-J@users.noreply.github.com 
-	name = Robert Jones
 [core]
-	excludesfile = /Users/robertjones/.gitignore_global
+	excludesfile = ~/dotfiles/git/gitignore_global
 	editor = vim
 [alias]
 	sla = log --oneline --decorate --graph --all
@@ -10,3 +10,5 @@
   pl = pull --rebase
 [push]
 	default = upstream
+[hub]
+  protocol = ssh
