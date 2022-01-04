@@ -120,70 +120,89 @@ filetype off                  " required
 " vim-plug checks for an autoload file and if not downloads it and installs
 " plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
+
 " Editor improvements
-Plug 'tpope/vim-fireplace' "Repl support
-Plug 'myusuf3/numbers.vim'      "Relative line numbers
-Plug 'scrooloose/nerdtree'      "File tree navigation. Remapped above.
+Plug 'tpope/vim-fireplace'       "Repl support
+Plug 'myusuf3/numbers.vim'       "Relative line numbers
+Plug 'scrooloose/nerdtree'       "File tree navigation. Remapped above.
 Plug 'scrooloose/nerdcommenter'  "Comment functions
-Plug 'bling/vim-airline'        "The fancy strip at the bottom
-Plug 'tpope/vim-fugitive'       "Git wrapper
-Plug 'tpope/vim-sensible'       "Universal, agreeable defaults
-Plug 'ctrlpvim/ctrlp.vim'       "Fuzzy Search
-Plug 'tpope/vim-surround'       "parentheses support
-Plug 'tpope/vim-repeat'         "repeats plugin actions with .
-Plug 'jiangmiao/auto-pairs'     "adds closing brackets
-Plug '/usr/local/opt/fzf'       "fzf fuzzy search
+Plug 'bling/vim-airline'         "The fancy strip at the bottom
+Plug 'tpope/vim-fugitive'        "Git wrapper
+Plug 'tpope/vim-sensible'        "Universal, agreeable defaults
+Plug 'ctrlpvim/ctrlp.vim'        "Fuzzy Search
+Plug 'tpope/vim-surround'        "parentheses support
+Plug 'tpope/vim-repeat'          "repeats plugin actions with .
+Plug 'jiangmiao/auto-pairs'      "adds closing brackets
+Plug '/usr/local/opt/fzf'        "fzf fuzzy search
 Plug 'junegunn/fzf.vim'
 
+" General
+" Plug 'chaoren/vim-wordmotion'                    " sensible word based movement/ disabled because breaking change
+Plug 'tomtom/tcomment_vim'                       " sensible commenting
+
+Plug 'tommcdo/vim-exchange'                      " word exchange that isn't awful
+Plug 'vim-scripts/ReplaceWithRegister'
+
+Plug 'sirver/ultisnips'                          "snippet support
+
+Plug 'machakann/vim-highlightedyank'             "Make the yanked region apparent!
+
+Plug 'janko-m/vim-test'                          " unified wrapper for running tests
+
+Plug 'einfachtoll/didyoumean'                    " asks for the right file
+
+" LSP support 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Misc languages
 " Clojure
-Plug 'guns/vim-clojure-static' "Clojure runtime files
-
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' } "Clojure runtime files
 " Rust
-Plug 'rust-lang/rust.vim'
-
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
+Plug 'fatih/vim-go', { 'for': 'golang', 'do': ':GoUpdateBinaries'  }
 
 " Javascript
-"Plug 'w0rp/ale'                 "async linting
-Plug 'pangloss/vim-javascript' "syntax highlighting and improved indentation
-Plug 'jelera/vim-javascript-syntax' "syntax highlight
-" Plug 'mxw/vim-jsx'              "Syntax highlighting and indenting for JSX
-" (deprecated)
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }  "syntax highlighting and improved indentation
+Plug 'jelera/vim-javascript-syntax'                               "syntax highlight
+Plug 'moll/vim-node'
+
 Plug 'maxmellon/vim-jsx-pretty' "syntax highlighting after deprecation of vim-jsx
 Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
 Plug 'posva/vim-vue'            "syntax highlighting for vue
 
-" Code Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Typescript
-Plug 'palantir/tslint' "tslint support although deprecated
 Plug 'leafgarland/typescript-vim' "syntax highlighting
 Plug 'peitalin/vim-jsx-typescript' "syntax highlighting again
+
 
 " Clojure
 Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
 
 " Java build tools
-Plug 'bazelbuild/vim-ft-bzl' "rudimentary Bazel filetype plugin
+Plug 'bazelbuild/vim-ft-bzl'  "rudimentary Bazel filetype plugin
+Plug 'google/vim-maktaba'     "required for vim-bazel
+Plug 'bazelbuild/vim-bazel'   "java/scala build support
+Plug 'derekwyatt/vim-scala'   "scala language support
 
 " Tmux Integration
 Plug 'christoomey/vim-tmux-navigator' "allow sensible pane switching from vim panes to tmux panes
 
 " Template Highlighting and Support
+Plug 'mustache/vim-mustache-handlebars', {'for': ['handlebars', 'hbs']}  "template support 
 Plug 'digitaltoad/vim-pug'
 Plug 'lumiliet/vim-twig' "twig template support
 Plug 'mattn/emmet-vim'          "emmet support
 
 " Styled Components
-Plug 'styled-components/vim-styled-components' "syntax highlighting
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' } "syntax highlighting
 
 " Themes
 Plug 'w0ng/vim-hybrid'
