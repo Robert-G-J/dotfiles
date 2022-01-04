@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+cd $HOME
+touch .hushlogin
+
+echo "Getting command line tools"
+xcode-select --install
+
+echo "Setting up homebrew and packages"
+/usr/bin ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew tap/homebrew/cask-versions
+
+brew cask install \
+  brave-browser \
+  keepingyouawake \
+  adoptopenjdk8 \
+  typora
+
+brew install \
+  awk \
+  curl \
+  fd \
+  fzf \
+  git \
+  hub \
+  jq \
+  neovim \
+  ripgrep \
+  the_silver_searcher \
+  tmux \
+  tree \
+  zsh \
+
+  
+brew tap universal-ctags/universal-ctags
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+
+echo "Setting up SSH"
+ssh-keygen -t rsa -b 4096 -C "robert.g.jones@gmail.com"
+echo "Host *\n AddKeystoAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" >> $HOME/.ssh/config
+eval "$(ssh-agent -s)"
+ssh-add -K %HOME/.ssh/id_rsa
+
+echo "Node"
+curl -L https://git.io/n-install | bash
+
+echo "zplug Setup"
+
+
+echo "Vim Plug Setup"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
