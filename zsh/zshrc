@@ -46,6 +46,9 @@ alias gc='git commit'
 alias zp='vim ~/.zshrc'
 alias zpr='source ~/.zshrc'
 alias goto='git checkout'
+alias k='kubectl'
+alias kcx='kubectx'
+alias mk='minikube'
 
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
@@ -94,7 +97,7 @@ colors
 # enable coloured output from ls, etc on FreeBSD-based systems
 export CLICOLOR=1
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh --not sure this is doing anything at all
 
 # source bash_profile
-source ~/.bash_profile
+# source ~/.bash_profile
