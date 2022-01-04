@@ -68,18 +68,28 @@ let g:used_javascript_libs = 'angularjs, angularui'
 "       \}
 " let g:ale_fix_on_save = 0 " runs prettier on save
 
+
+"=================================================================
+
 " COC configuration
+" export NVIM_COC_LOG_LEVEL=debug 
+" Enable prettier to format current buffer using CoC
+nmap <leader>fd :CocCommand prettier.formatFile<cr>
+
+" Enable COC when in node projects
 let g:coc_global_extensions = [
       \ 'coc-tsserver'
-      \]
+    \]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-    let g:coc_global_extensions += ['coc-prettier']
+  let g:coc_global_extensions += ['coc-prettier']
 endif
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-    let g:coc_global_extensions += ['coc-eslint']
+  let g:coc_global_extensions += ['coc-eslint']
 endif
+
+"=================================================================
 
 " Airline
 " let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
