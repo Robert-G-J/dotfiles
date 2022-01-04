@@ -108,7 +108,10 @@ let g:ctrlp_show_hidden = 1 "shows hidden files
 let g:ctrlp_working_path_mode = 'rwa' "modify to run from cwd
 
 "Emmet
-let g:user_emmet_leader_key='<Tab>'
+if isdirectory('./node_modules')
+  let g:user_emmet_leader_key=','
+endif
+
 let g:user_emmet_settings = { 'javascript.jsx' : { 'extends' : 'jsx', } }
 
 "============================================================
