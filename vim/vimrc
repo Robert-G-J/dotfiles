@@ -93,16 +93,16 @@ endif
 
 " Airline
 " let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
-let g:airline_section_b = '' " Hide the branch info in airline
+" let g:airline_section_b = '' " Hide the branch info in airline
 
 " NERDTree
 let NERDTreeShowHidden = 1 "shows hidden files as default
 
 " CtrlP
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](node_modules)|\.(git|hg|svn|next|node_modules)$',
-  \ 'file': '\v\.(exe|so|dll|DS_Store)$',
-  \ } "ctrlp ignores
+\ 'dir':  '\v[\/](node_modules)|\.(git|hg|svn|next|node_modules)$',
+\ 'file': '\v\.(exe|so|dll|DS_Store)$',
+\ } "ctrlp ignores
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_show_hidden = 1 "shows hidden files
 
