@@ -17,37 +17,37 @@ au BufNewFile,BufRead *.ejs set filetype=html "use html syntax highlighting for 
 nnoremap p p`[v`]=
 
 " Easy access to the start of the line
-nmap 0 ^
+nnoremap 0 ^
 " Set Leader to be the space-bar
 let mapleader = "\<Space>"
 
 " New tab and edit vimrc
-nmap <leader>vi :tabedit $MYVIMRC<cr>
+nnoremap <leader>vi :tabedit $MYVIMRC<cr>
 " Source (reload) the vimrc
-nmap <leader>so :source $MYVIMRC<cr>
+nnoremap <leader>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-nmap <leader>nt :NERDTree<cr>
-nmap <leader>nf :NERDTreeFind<cr>
+nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nf :NERDTreeFind<cr>
 
 "ALE fix file
 " nmap <leader>sa :ALEFix<cr>
 
 " Paste last yank
-nmap <leader>p "0P
+nnoremap <leader>p "0P
 
 "Run tests
-nmap <leader>t :!yarn test<cr>
+nnoremap <leader>t :!yarn test<cr>
 
 "Move up and down by visible lines if current line is wrapping
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 
 "Remap escape keys
-imap jj <Esc>
+inoremap jj <Esc>
 
 " Save file on escaping insert mode
-imap <esc> <esc>:w<cr>
+:autocmd InsertLeave * silent! update
 
 "============================================================
 "                   ~Plugin Config~
@@ -74,7 +74,7 @@ let g:used_javascript_libs = 'angularjs, angularui'
 " COC configuration
 " export NVIM_COC_LOG_LEVEL=debug 
 " Enable prettier to format current buffer using CoC
-nmap <leader>fd :CocCommand prettier.formatFile<cr>
+nnoremap <leader>fd :CocCommand prettier.formatFile<cr>
 
 " Enable COC when in node projects
 let g:coc_global_extensions = [
@@ -177,11 +177,9 @@ Plug 'maxmellon/vim-jsx-pretty' "syntax highlighting after deprecation of vim-js
 Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
 Plug 'posva/vim-vue'            "syntax highlighting for vue
 
-
 " Typescript
 Plug 'leafgarland/typescript-vim' "syntax highlighting
 Plug 'peitalin/vim-jsx-typescript' "syntax highlighting again
-
 
 " Clojure
 Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
