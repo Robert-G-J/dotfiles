@@ -199,6 +199,9 @@ Plug 'digitaltoad/vim-pug'
 Plug 'lumiliet/vim-twig' "twig template support
 Plug 'mattn/emmet-vim'          "emmet support
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 " Styled Components
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' } "syntax highlighting
 
