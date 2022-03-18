@@ -164,9 +164,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' } "Clojure runtime files
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Go
-Plug 'fatih/vim-go', { 'for': 'golang', 'do': ':GoUpdateBinaries'  }
+" Plug 'fatih/vim-go', { 'for': 'golang', 'do': ':GoUpdateBinaries'  }
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }  "syntax highlighting and improved indentation
