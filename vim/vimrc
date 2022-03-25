@@ -394,7 +394,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Non-plug in settings
 syntax enable
-set background=dark
+set background=light
 colorscheme hybrid
 
 "Use system clipboard.
