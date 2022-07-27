@@ -30,6 +30,10 @@ nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <leader>nt :NERDTree<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
 
+" fzf mappings
+nnoremap <silent> <leader>d :Files<cr> 
+nnoremap <silent> <Leader>f :Rg<cr>
+
 "ALE fix file
 " nmap <leader>sa :ALEFix<cr>
 
@@ -304,9 +308,9 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 nnoremap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xnoremap <leader>f  <Plug>(coc-format-selected)
-vnoremap <leader>f  <Plug>(coc-format-selected)
-nnoremap <leader>f  <Plug>(coc-format-selected)
+" xnoremap <leader>f  <Plug>(coc-format-selected)
+" vnoremap <leader>f  <Plug>(coc-format-selected)
+" nnoremap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
 autocmd!
