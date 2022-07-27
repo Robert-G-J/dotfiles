@@ -28,6 +28,8 @@ setopt share_history # share command history data
 
 # load env variables
 export LESS="-XFR"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True # required for kubectl auth updates
+export FZF_DEFAULT_COMMAND='rg' # make fzf use rg by default
 # export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
 # export ANSIBLE_HOST_KEY_CHECKING=False
 # export GOPATH=/Users/robertjones/Code/go
