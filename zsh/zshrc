@@ -60,8 +60,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 source $(brew --prefix nvm)/nvm.sh
 
-zplug 'mafredri/zsh-async'
-zplug 'sindresorhus/pure'
+zplug 'mafredri/zsh-async', from:"github", at:"main", use:"async.zsh"
+zplug 'sindresorhus/pure', use:pure.zsh, at:"main", from:github, as:theme
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
