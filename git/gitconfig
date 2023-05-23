@@ -17,3 +17,5 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[commit]
+	template = /Users/robjones/.gitmessage
