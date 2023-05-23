@@ -149,24 +149,20 @@ Plug 'junegunn/fzf.vim'
 " General
 " Plug 'chaoren/vim-wordmotion'                    " sensible word based movement/ disabled because breaking change
 Plug 'tomtom/tcomment_vim'                       " sensible commenting
-
 Plug 'tommcdo/vim-exchange'                      " word exchange that isn't awful
 Plug 'vim-scripts/ReplaceWithRegister'
-
 Plug 'sirver/ultisnips'                          "snippet support
-
 Plug 'machakann/vim-highlightedyank'             "Make the yanked region apparent!
-
 Plug 'janko-m/vim-test'                          " unified wrapper for running tests
-
 Plug 'einfachtoll/didyoumean'                    " asks for the right file
+Plug 'jparise/vim-graphql'                      "support for graphql
 
 " LSP support 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Misc languages
 " Clojure
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' } "Clojure runtime files
+" Plug 'guns/vim-clojure-static', { 'for': 'clojure' } "Clojure runtime files
 " Rust
 "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Go
@@ -179,14 +175,14 @@ Plug 'moll/vim-node'
 
 Plug 'maxmellon/vim-jsx-pretty' "syntax highlighting after deprecation of vim-jsx
 Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
-Plug 'posva/vim-vue'            "syntax highlighting for vue
+" Plug 'posva/vim-vue'            "syntax highlighting for vue
 
 " Typescript
 Plug 'leafgarland/typescript-vim' "syntax highlighting
 Plug 'peitalin/vim-jsx-typescript' "syntax highlighting again
 
 " Clojure
-Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
+" Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
 
 " Java build tools
 Plug 'bazelbuild/vim-ft-bzl'  "rudimentary Bazel filetype plugin
@@ -200,8 +196,8 @@ Plug 'christoomey/vim-tmux-navigator' "allow sensible pane switching from vim pa
 " Template Highlighting and Support
 Plug 'mustache/vim-mustache-handlebars', {'for': ['handlebars', 'hbs']}  "template support 
 Plug 'digitaltoad/vim-pug'
-Plug 'lumiliet/vim-twig' "twig template support
-Plug 'mattn/emmet-vim'          "emmet support
+Plug 'lumiliet/vim-twig'                                                 "twig template support
+Plug 'mattn/emmet-vim'                                                   "emmet support
 
 " Terraform
 Plug 'hashivim/vim-terraform'
