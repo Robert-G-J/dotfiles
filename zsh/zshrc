@@ -30,6 +30,7 @@ setopt share_history # share command history data
 export LESS="-XFR"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True # required for kubectl auth updates
 export FZF_DEFAULT_COMMAND='rg' # make fzf use rg by default
+export CLOUDSDK_PYTHON="/usr/local/bin/python3.9"
 # export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-pass.txt
 # export ANSIBLE_HOST_KEY_CHECKING=False
 # export GOPATH=/Users/robertjones/Code/go
@@ -41,6 +42,7 @@ export FZF_DEFAULT_COMMAND='rg' # make fzf use rg by default
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"'
 alias brewup="brew update && brew upgrade && brew cleanup"
 alias gs='git status'
+alias gp='git pull'
 alias ga='git add'
 alias gd='git diff'
 alias gcm='git commit -m'
@@ -51,6 +53,7 @@ alias goto='git checkout'
 alias k='kubectl'
 alias kcx='kubectx'
 alias mk='minikube'
+alias pn='pnpm'
 
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
@@ -99,7 +102,22 @@ colors
 # enable coloured output from ls, etc on FreeBSD-based systems
 export CLICOLOR=1
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh --not sure this is doing anything at all
+- [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
+
+# Source sensitive env var
+source ~/env_var/env-vars.zsh
 
 # source bash_profile
 # source ~/.bash_profile
+
+# >>> scala-cli completions >>>
+fpath=("/Users/robjones/Library/Application Support/ScalaCli/completions/zsh" $fpath)
+compinit
+# <<< scala-cli completions <<<
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/robjones/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/robjones/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/robjones/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/robjones/google-cloud-sdk/completion.zsh.inc'; fi
+autoload -U compinit; compinit
