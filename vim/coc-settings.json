@@ -6,6 +6,11 @@
       "command": "terraform-lsp",
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
+    },
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala", "sbt"]
     }
   }
 }
