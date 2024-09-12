@@ -14,34 +14,38 @@ au BufNewFile,BufRead *.ejs set filetype=html "use html syntax highlighting for 
 "============================================================
 "                     ~Mappings~
 
-nnoremap p p`[v`]=
-
+ noremap p p`[v`]=
+ 
 " Easy access to the start of the line
 nnoremap 0 ^
-" Set Leader to be the space-bar
-let mapleader = "\<Space>"
+
+" Prevent incomplete mapping messages
+nnoremap <Space> <Nop>
+xnoremap <Space> <Nop>
 
 " New tab and edit vimrc
-nnoremap <leader>vi :tabedit $MYVIMRC<cr>
+nnoremap <Space>vi :tabedit $MYVIMRC<cr>
 " Source (reload) the vimrc
-nnoremap <leader>so :source $MYVIMRC<cr>
+nnoremap <Space>so :source $MYVIMRC<cr>
 
 "Open NERDTree
-nnoremap <leader>nt :NERDTree<cr>
-nnoremap <leader>nf :NERDTreeFind<cr>
+nnoremap <Space>nt :NERDTree<cr>
+nnoremap <Space>nf :NERDTreeFind<cr>
 
 " fzf mappings
-nnoremap <silent> <leader>d :Files<cr> 
-nnoremap <silent> <Leader>f :Rg<cr>
+nnoremap <silent> <Space>d :Files<cr> 
+nnoremap <silent> <Space>f :Rg<cr>
+" Loads fzf window with ripgrep on :Rg command
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 "ALE fix file
-" nmap <leader>sa :ALEFix<cr>
+" nmap <Space>sa :ALEFix<cr>
 
 " Paste last yank
-nnoremap <leader>p "0P
+nnoremap <Space>p "0P
 
 "Run tests
-nnoremap <leader>t :!yarn test<cr>
+nnoremap <Space>t :!yarn test<cr>
 
 "Move up and down by visible lines if current line is wrapping
 nnoremap j gj
@@ -53,6 +57,7 @@ inoremap jj <Esc>
 " Save file on escaping insert mode
 :autocmd InsertLeave * silent! update
 
+"
 "============================================================
 "                   ~Plugin Config~
 "let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -78,7 +83,7 @@ let g:used_javascript_libs = 'angularjs, angularui'
 " COC configuration
 " export NVIM_COC_LOG_LEVEL=debug 
 " Enable prettier to format current buffer using CoC
-nnoremap <leader>fd :CocCommand prettier.formatFile<cr>
+nnoremap <Space>fd :CocCommand prettier.formatFile<cr>
 
 " Enable COC when in node projects
 let g:coc_global_extensions = [
@@ -279,10 +284,10 @@ nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nnoremap <leader> gd <Plug>(coc-definition)
-nnoremap <leader> gy <Plug>(coc-type-definition)
-nnoremap <leader> gi <Plug>(coc-implementation)
-nnoremap <leader> gr <Plug>(coc-references)
+nnoremap <Space> gd <Plug>(coc-definition)
+nnoremap <Space> gy <Plug>(coc-type-definition)
+nnoremap <Space> gi <Plug>(coc-implementation)
+nnoremap <Space> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -301,12 +306,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Symbol renaming.
-nnoremap <leader>rn <Plug>(coc-rename)
+nnoremap <Space>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-" xnoremap <leader>f  <Plug>(coc-format-selected)
-" vnoremap <leader>f  <Plug>(coc-format-selected)
-" nnoremap <leader>f  <Plug>(coc-format-selected)
+" xnoremap <Space>f  <Plug>(coc-format-selected)
+" vnoremap <Space>f  <Plug>(coc-format-selected)
+" nnoremap <Space>f  <Plug>(coc-format-selected)
 
 augroup mygroup
 autocmd!
@@ -317,14 +322,14 @@ autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xnoremap <leader>a  <Plug>(coc-codeaction-selected)
-nnoremap <leader>a  <Plug>(coc-codeaction-selected)
+" Example: `<Space>aap` for current paragraph
+xnoremap <Space>a  <Plug>(coc-codeaction-selected)
+nnoremap <Space>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nnoremap <leader>ac  <Plug>(coc-codeaction)
+nnoremap <Space>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nnoremap <leader>qf  <Plug>(coc-fix-current)
+nnoremap <Space>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -339,8 +344,8 @@ onoremap ac <Plug>(coc-classobj-a)
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-nnoremap <leader> <C-s> <Plug>(coc-range-select)
-xnoremap <leader> <C-s> <Plug>(coc-range-select)
+" nnoremap <Space> <C-s> <Plug>(coc-range-select)
+" xnoremap <Space> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
