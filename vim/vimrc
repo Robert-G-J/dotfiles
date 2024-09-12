@@ -191,8 +191,8 @@ Plug 'peitalin/vim-jsx-typescript' "syntax highlighting again
 
 " Java build tools
 Plug 'bazelbuild/vim-ft-bzl'  "rudimentary Bazel filetype plugin
-Plug 'google/vim-maktaba'     "required for vim-bazel
-Plug 'bazelbuild/vim-bazel'   "java/scala build support
+" Plug 'google/vim-maktaba'     "required for vim-bazel
+" Plug 'bazelbuild/vim-bazel'   "java/scala build support
 Plug 'derekwyatt/vim-scala'   "scala language support
 
 " Tmux Integration
