@@ -1,2 +1,6 @@
 vim/plugged/
 vim/autoload/
+vim/.netrwhist
+
+zsh/*.backup
+
