@@ -215,6 +215,9 @@ Plug 'w0ng/vim-hybrid'
 Plug 'reedes/vim-colors-pencil'
 Plug 'altercation/vim-colors-solarized' "easy on the eye
 
+" LLM
+Plug 'github/copilot.vim', { 'url': 'git@github.com:github/copilot.vim.git' } "use ssh
+
 " Git plugin not hosted on GitHub
 "Plug 'wincent/command-t', {
 " \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
