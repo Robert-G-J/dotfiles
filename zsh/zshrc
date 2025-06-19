@@ -82,9 +82,11 @@ if ! zplug check --verbose; then
 zplug load --verbose
 
 # Plugins
+source ~/dotfiles/zsh/zsh-functions.zsh
 source ~/dotfiles/zsh/omz-git.zsh # loads git integration, stolen from omz
 source ~/.iterm2_shell_integration.zsh
 source <(kubectl completion zsh)
+RPROMPT='$(kubectx_prompt)'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
