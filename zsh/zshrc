@@ -114,9 +114,12 @@ source ~/env_var/env-vars.zsh
 # source ~/.bash_profile
 
 # >>> scala-cli completions >>>
-fpath=("/Users/robjones/Library/Application Support/ScalaCli/completions/zsh" $fpath)
+fpath=(
+  "/Users/robjones/Library/Application Support/ScalaCli/completions/zsh"
+  ~/dotfiles/zsh/completion
+  $fpath
+)
 compinit
-# <<< scala-cli completions <<<
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/robjones/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/robjones/google-cloud-sdk/path.zsh.inc'; fi
