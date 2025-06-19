@@ -5,9 +5,15 @@
 	excludesfile = ~/dotfiles/git/gitignore_global
 	editor = vim
 [alias]
-	sla = log --oneline --decorate --graph --all
+  bdl = branch -d  # delete local branch
+  ca = commit --amend
+	dbr = push origin --delete # delete remote branch
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # log with pretty format
 	mup = !git checkout master && git pull && git checkout -
   pl = pull --rebase
+  plom = pl origin main
+  puf = push --force
+	sla = log --oneline --decorate --graph --all # log commits with graphical view
 [push]
 	default = upstream
 	autoSetupRemote = true
