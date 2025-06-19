@@ -54,6 +54,7 @@ alias k='kubectl'
 alias kcx='kubectx'
 alias mk='minikube'
 alias pn='pnpm'
+alias tn='tmux new -f'
 
 # required for Z installation
 . `brew --prefix`/etc/profile.d/z.sh
