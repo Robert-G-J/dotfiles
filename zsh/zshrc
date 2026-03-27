@@ -40,7 +40,7 @@ export CLOUDSDK_PYTHON="/usr/local/bin/python3.9"
 
 # aliases
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Performing tree recursively, without node modules"'
-alias brewup="brew update && brew upgrade && brew cleanup"
+alias brewup="sudo -v brew update && brew upgrade && brew cleanup" # update, upgrade brew packages & cleanup old versions; check for admin perms first
 alias gs='git status'
 alias gp='git pull'
 alias ga='git add'
@@ -127,3 +127,4 @@ if [ -f '/Users/robjones/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/robjon
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/robjones/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/robjones/google-cloud-sdk/completion.zsh.inc'; fi
 autoload -U compinit; compinit
+
