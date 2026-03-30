@@ -2,9 +2,8 @@
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export NVM_DIR="$HOME/.nvm"
 export LESS="-XFR"
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export FZF_DEFAULT_COMMAND='rg'
-export CLOUDSDK_PYTHON="/usr/local/bin/python3.9"
+export CLOUDSDK_PYTHON="/usr/local/bin/python3"
 export CLICOLOR=1
 
 # Consolidate fpath for completions
@@ -76,8 +75,7 @@ pnpm() { lazy_nvm pnpm "$@"; }
 [ -f "opt/homebrew/etc/profile.d/z.sh" ] && . "opt/homebrew/etc/profile.d/z.sh"	# Apple Silicon Mac profile
 
 # Google Cloud SDK
-[ -f '/Users/robjones/google-cloud-sdk/path.zsh.inc' ] && . '/Users/robjones/google-cloud-sdk/path.zsh.inc'
-[ -f '/Users/robjones/google-cloud-sdk/completion.zsh.inc' ] && . '/Users/robjones/google-cloud-sdk/completion.zsh.inc'
+alias load-gcloud='source "/Users/robjones/google-cloud-sdk/path.zsh.inc" && source "/Users/robjones/google-cloud-sdk/completion.zsh.inc"' # Google Cloud SDK - Load only when needed
 
 # Local Scripts
 source ~/dotfiles/zsh/zsh-functions.zsh
@@ -104,6 +102,19 @@ kc() {
 kn() {
   kubectl config set-context --current --namespace="$1"
 }
+
+# 7. Path configuration - Ensure custom paths are prioritised and duplicates are removed
+typeset -U path
+
+# # Set the priority order
+path=(
+  /usr/local/bin
+  /usr/local/sbin
+  $HOME/google-cloud-sdk/bin
+  $HOME/.orbstack/bin
+  $path
+  )
+export PATH
 
 ## 7. Final Initialization (Run ONCE)
 autoload -Uz colors && colors
