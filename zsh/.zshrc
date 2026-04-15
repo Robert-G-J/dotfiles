@@ -9,7 +9,7 @@ export CLICOLOR=1
 # Consolidate fpath for completions
 fpath=(
   "/Users/robjones/Library/Application Support/ScalaCli/completions/zsh"
-  ~/dotfiles/zsh/completion
+  ~/.zsh/completion
   $fpath
 )
 
@@ -80,8 +80,8 @@ pnpm() { lazy_nvm pnpm "$@"; }
 alias load-gcloud='source "/Users/robjones/google-cloud-sdk/path.zsh.inc" && source "/Users/robjones/google-cloud-sdk/completion.zsh.inc"' # Google Cloud SDK - Load only when needed
 
 # Local Scripts
-source ~/dotfiles/zsh/zsh-functions.zsh
-source ~/dotfiles/zsh/omz-git.zsh
+source ~/.zsh/zsh-functions.zsh
+source ~/.zsh/omz-git.zsh
 source ~/.iterm2_shell_integration.zsh
 source ~/env_var/env-vars.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
