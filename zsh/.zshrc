@@ -85,6 +85,9 @@ alias load-gcloud='source "$HOME/google-cloud-sdk/path.zsh.inc" && source "$HOME
 [ -f ~/env_var/env-vars.zsh ]            && source ~/env_var/env-vars.zsh
 [ -f ~/.fzf.zsh ]                        && source ~/.fzf.zsh
 
+# Initialise completion system (must run before kubectl completion)
+autoload -Uz compinit && compinit
+
 # K8s Prompt - Source after all env vars are set
 if command -v kubectl &>/dev/null; then
   if [ ! -f ~/.kube/completion.zsh ]; then
@@ -120,7 +123,6 @@ export PATH
 
 ## 7. Final Initialization (Run ONCE)
 autoload -Uz colors && colors
-autoload -Uz compinit && compinit
 
 ## 8. Ensure Ctrl-Z (SIGSTOP) works regardless of plugin interference
 bindkey -e                 # Emacs keybindings on CLI
