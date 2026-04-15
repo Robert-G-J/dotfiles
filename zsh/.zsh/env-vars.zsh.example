@@ -1,0 +1,8 @@
+# Environment variables / secrets
+# Copy this file to ~/env_var/env-vars.zsh and fill in your values.
+# That file is sourced by .zshrc if it exists. Never commit the real file.
+
+export ARTIFACTORY_USER=""
+export ARTIFACTORY_PASS=""
+export NPM_TOKEN=""
+export ATLASSIAN_API_TOKEN=""
