@@ -1,14 +1,24 @@
+## 0. Architecture detection
+if [[ "$(uname -m)" == "arm64" ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+else
+  export HOMEBREW_PREFIX="/usr/local"
+fi
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+
 ## 1. Environment & FPATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+if /usr/libexec/java_home -v 11 &>/dev/null; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+fi
 export NVM_DIR="$HOME/.nvm"
 export LESS="-XFR"
 export FZF_DEFAULT_COMMAND='rg'
-export CLOUDSDK_PYTHON="/usr/local/bin/python3"
+export CLOUDSDK_PYTHON="${HOMEBREW_PREFIX}/bin/python3"
 export CLICOLOR=1
 
 # Consolidate fpath for completions
 fpath=(
-  "/Users/robjones/Library/Application Support/ScalaCli/completions/zsh"
+  "$HOME/Library/Application Support/ScalaCli/completions/zsh"
   ~/.zsh/completion
   $fpath
 )
@@ -63,27 +73,27 @@ pnpm() { lazy_nvm pnpm "$@"; }
 
 ## 6. External Tooling
 # Load Z
-[ -f "/usr/local/etc/profile.d/z.sh" ] && . "/usr/local/etc/profile.d/z.sh" # Intel Mac profile
-[ -f "opt/homebrew/etc/profile.d/z.sh" ] && . "opt/homebrew/etc/profile.d/z.sh"	# Apple Silicon Mac profile
+[ -f "${HOMEBREW_PREFIX}/etc/profile.d/z.sh" ] && . "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 
 # Google Cloud SDK
-alias load-gcloud='source "/Users/robjones/google-cloud-sdk/path.zsh.inc" && source "/Users/robjones/google-cloud-sdk/completion.zsh.inc"' # Google Cloud SDK - Load only when needed
+alias load-gcloud='source "$HOME/google-cloud-sdk/path.zsh.inc" && source "$HOME/google-cloud-sdk/completion.zsh.inc"'
 
 # Local Scripts
-source ~/.zsh/zsh-functions.zsh
-source ~/.zsh/omz-git.zsh
-source ~/.iterm2_shell_integration.zsh
-source ~/env_var/env-vars.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.zsh/zsh-functions.zsh ]          && source ~/.zsh/zsh-functions.zsh
+[ -f ~/.zsh/omz-git.zsh ]               && source ~/.zsh/omz-git.zsh
+[ -f ~/.iterm2_shell_integration.zsh ]   && source ~/.iterm2_shell_integration.zsh
+[ -f ~/env_var/env-vars.zsh ]            && source ~/env_var/env-vars.zsh
+[ -f ~/.fzf.zsh ]                        && source ~/.fzf.zsh
 
 # K8s Prompt - Source after all env vars are set
-if [ ! -f ~/.kube/completion.zsh ]; then
-  mkdir -p ~/.kube
-  kubectl completion zsh > ~/.kube/completion.zsh
+if command -v kubectl &>/dev/null; then
+  if [ ! -f ~/.kube/completion.zsh ]; then
+    mkdir -p ~/.kube
+    kubectl completion zsh > ~/.kube/completion.zsh
+  fi
+  source ~/.kube/completion.zsh
+  RPROMPT='$(kubectx_prompt)'
 fi
-source ~/.kube/completion.zsh
-## To display the current k8s context in the prompt for visual safety
-RPROMPT='$(kubectx_prompt)'
 
 ## Used to quickly switch between k8s contexts 
 kc() {
@@ -100,8 +110,8 @@ typeset -U path
 
 # # Set the priority order
 path=(
-  /usr/local/bin
-  /usr/local/sbin
+  ${HOMEBREW_PREFIX}/bin
+  ${HOMEBREW_PREFIX}/sbin
   $HOME/google-cloud-sdk/bin
   $HOME/.orbstack/bin
   $path
