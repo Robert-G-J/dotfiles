@@ -38,25 +38,15 @@ alias gs='git status' gp='git pull' ga='git add' gd='git diff'
 alias gcm='git commit -m' gc='git commit' goto='git checkout'
 alias zp='vim ~/.zshrc' zpr='exec zsh'
 alias k='kubectl' kcx='kubectx' mk='minikube' tn='tmux new -f'
+alias update-plugins='for d in ~/.zsh/plugins/*/; do git -C "$d" pull; done'
 
-## 4. Plugin Manager (zplug)
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-zplug 'mafredri/zsh-async', from:"github", at:"main", use:"async.zsh"
-zplug 'sindresorhus/pure', use:pure.zsh, at:"main", from:github, as:theme
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "docker/compose", use:contrib/completion/zsh
-
-if ! zplug check --verbose; then
-  printf "Install [y/N]: "
-  if read -q; then
-      zplug install
-  fi
-fi
-zplug load --verbose
+## 4. Plugins (cloned by bootstrap.sh into ~/.zsh/plugins/)
+PLUGINS="$HOME/.zsh/plugins"
+fpath=($PLUGINS/pure $PLUGINS/zsh-completions/src $fpath)
+[ -f "$PLUGINS/zsh-async/async.zsh" ]                                         && source "$PLUGINS/zsh-async/async.zsh"
+[ -f "$PLUGINS/pure/pure.zsh" ]                                               && source "$PLUGINS/pure/pure.zsh"
+[ -f "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ]                  && source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]         && source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 ## 5. Lazy-Load NVM (Huge speed boost)
 lazy_nvm() {
