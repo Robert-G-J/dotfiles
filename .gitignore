@@ -1,6 +1,16 @@
-vim/plugged/
-vim/autoload/
-vim/.netrwhist
+# Vim plugin directories (managed by vim-plug, not tracked)
+vim/.vim/plugged/
+vim/.vim/autoload/
+vim/.vim/.netrwhist
 
+# Zsh plugins (cloned by bootstrap.sh, not tracked)
+zsh/.zsh/plugins/
+
+# Zsh backups
 zsh/*.backup
 
+# IDE artefacts
+.metals/
+
+# Symlink backup (pre-migration reference)
+symlinks_backup.txt

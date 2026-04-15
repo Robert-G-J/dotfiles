@@ -2,7 +2,7 @@
   name = Robert Jones
 	email = 22344413+Robert-G-J@users.noreply.github.com 
 [core]
-	excludesfile = ~/dotfiles/git/gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [alias]
   bdl = branch -d  # delete local branch
@@ -17,11 +17,9 @@
 [push]
 	default = upstream
 	autoSetupRemote = true
-[hub]
-  protocol = ssh
 [pull]
 	rebase = false
 [init]
 	defaultBranch = main
 [commit]
-	template = /Users/robjones/.gitmessage
+	template = ~/.gitmessage

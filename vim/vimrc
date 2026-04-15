@@ -158,7 +158,7 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'altercation/vim-colors-solarized'
 
 " LLM
-Plug 'github/copilot.vim', { 'url': 'git@github.com:github/copilot.vim.git' }
+Plug 'github/copilot.vim'
 
 call plug#end()
 
