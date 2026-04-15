@@ -30,8 +30,10 @@ setopt hist_ignore_dups hist_ignore_space hist_verify
 setopt inc_append_history share_history
 
 ## 3. Aliases
+alias pip="echo 'Use uv instead of pip to keep your Mac clean. Running: uv pip';" # Prevent accidental global pip installs by routing to uv
+alias pip-install="echo 'Installing via uv...'; uv pip install" # Prevent accidental global pip installs by routing to uv
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Tree excluding node_modules"'
-alias brewup="sudo -v && brew update && brew upgrade && brew cleanup"
+alias brewup="brew update && brew upgrade && brew cleanup"
 alias gs='git status' gp='git pull' ga='git add' gd='git diff'
 alias gcm='git commit -m' gc='git commit' goto='git checkout'
 alias zp='vim ~/.zshrc' zpr='exec zsh'
@@ -125,3 +127,6 @@ bindkey -e                 # Emacs keybindings on CLI
 setopt MONITOR             # Check for job control support to stay enabled
 bindkey '^Z' suspend-shell # re-bind Ctrl-Z to suspend the shell as is zsh default
 stty susp ^Z               # Terminal must honor the suspend signal
+
+# Claude Code
+export MAX_MCP_OUTPUT_TOKENS=100000

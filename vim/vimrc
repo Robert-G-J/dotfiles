@@ -6,16 +6,20 @@
 " Source:       https://github.com/robert-g-j/dotfiles
 "
 "============================================================
-"                     ~Top Settings~
 
-filetype plugin indent on    "required
-runtime macros/matchit.vim   "uses macro to jump between html/xml tags
-au BufNewFile,BufRead *.ejs set filetype=html "use html syntax highlighting for EJS
+set nocompatible          " must be first — disables Vi compatibility
+
+filetype plugin indent on " enable filetype detection, plugins, and indentation
+runtime macros/matchit.vim " jump between matching html/xml tags with %
+
+au BufNewFile,BufRead *.ejs set filetype=html " html syntax highlighting for EJS
+
 "============================================================
 "                     ~Mappings~
+"============================================================
 
- noremap p p`[v`]=
- 
+" To reindent after pasting: == (current line), =ip (paragraph), =3j (3 lines down)
+
 " Easy access to the start of the line
 nnoremap 0 ^
 
@@ -23,276 +27,241 @@ nnoremap 0 ^
 nnoremap <Space> <Nop>
 xnoremap <Space> <Nop>
 
-" New tab and edit vimrc
+" Edit and reload vimrc
 nnoremap <Space>vi :tabedit $MYVIMRC<cr>
-" Source (reload) the vimrc
 nnoremap <Space>so :source $MYVIMRC<cr>
 
-"Open NERDTree
+" File tree
 nnoremap <Space>nt :NERDTree<cr>
 nnoremap <Space>nf :NERDTreeFind<cr>
 
-" fzf mappings
-nnoremap <silent> <Space>d :Files<cr> 
+" Search
+" <C-p>     → CtrlP: find files by name
+" <Space>f  → fzf ripgrep: search text across files
 nnoremap <silent> <Space>f :Rg<cr>
-" Loads fzf window with ripgrep on :Rg command
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
-"ALE fix file
-" nmap <Space>sa :ALEFix<cr>
-
-" Paste last yank
+" Paste last yank (register 0, unaffected by deletes)
 nnoremap <Space>p "0P
 
-"Run tests
+" Run tests
 nnoremap <Space>t :!yarn test<cr>
 
-"Move up and down by visible lines if current line is wrapping
+" Move by visible lines when text is wrapped
 nnoremap j gj
 nnoremap k gk
 
-"Remap escape keys
+" Escape from insert mode
 inoremap jj <Esc>
 
-" Save file on escaping insert mode
-:autocmd InsertLeave * silent! update
+" Save on leaving insert mode
+autocmd InsertLeave * silent! update
 
-"
 "============================================================
 "                   ~Plugin Config~
-"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-let g:used_javascript_libs = 'angularjs, angularui'
-
-" ALE
-" let g:ale_javascript_prettier_use_local_config = 1
-" let g:ale_fixers = {
-"       \  'javascript': ['prettier', 'prettier-standard', 'standard', 'eslint'],
-"       \  'typescript': ['tslint', 'prettier'],
-"       \  'rust': ['rustfmt'],
-"       \  'go': ['gofmt', 'goimports'],
-"       \  'css': ['prettier'],
-"       \  'jade': ['prettier'],
-"       \  'html': ['html-beautify'],
-"       \  'json': ['prettier'],
-"       \}
-" let g:ale_fix_on_save = 0 " runs prettier on save
-
-
-"=================================================================
-
-" COC configuration
-" export NVIM_COC_LOG_LEVEL=debug 
-" Enable prettier to format current buffer using CoC
-nnoremap <Space>fd :CocCommand prettier.formatFile<cr>
-
-" Enable COC when in node projects
-let g:coc_global_extensions = [
-      \ 'coc-tsserver'
-    \]
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
-"=================================================================
-
-" Airline
-" let g:airline#extensions#ale#enabled = 1 " Integrate vim-airline and ale
-" let g:airline_section_b = '' " Hide the branch info in airline
+"============================================================
 
 " NERDTree
-let NERDTreeShowHidden = 1 "shows hidden files as default
+let NERDTreeShowHidden = 1
 
-" CtrlP
+" CtrlP — file finder on <C-p>
 let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/](node_modules)|\.(git|hg|svn|next|node_modules)$',
+\ 'dir':  '\v[\/](node_modules\|dist\|build)|\.(git|hg|svn|next|node_modules|bloop)$',
 \ 'file': '\v\.(exe|so|dll|DS_Store)$',
-\ } "ctrlp ignores
+\ }
 let g:ctrlp_dont_split = 'NERD'
-let g:ctrlp_show_hidden = 1 "shows hidden files
-let g:ctrlp_working_path_mode = 'rwa' "modify to run from cwd
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_user_command = 'rg %s --files --hidden --follow --glob "!{.git,node_modules,dist,build,.next,.bloop}"'
 
-"Emmet
+" Emmet — only in node projects
 if isdirectory('./node_modules')
   let g:user_emmet_leader_key=','
 endif
+let g:user_emmet_settings = { 'javascript.jsx' : { 'extends' : 'jsx' } }
 
-let g:user_emmet_settings = { 'javascript.jsx' : { 'extends' : 'jsx', } }
+" JavaScript library syntax hints
+let g:used_javascript_libs = 'angularjs, angularui'
 
 "============================================================
-filetype off                  " required
+"                   ~Plugins~
+"============================================================
 
-" vim-plug checks for an autoload file and if not downloads it and installs
-" plugins
+" vim-plug: auto-install if missing
 if empty(glob('~/.vim/autoload/plug.vim'))
-silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
-" Editor improvements
-Plug 'tpope/vim-fireplace'       "Repl support
-Plug 'myusuf3/numbers.vim'       "Relative line numbers
-Plug 'scrooloose/nerdtree'       "File tree navigation. Remapped above.
-Plug 'scrooloose/nerdcommenter'  "Comment functions
-Plug 'bling/vim-airline'         "The fancy strip at the bottom
-Plug 'tpope/vim-fugitive'        "Git wrapper
-Plug 'tpope/vim-sensible'        "Universal, agreeable defaults
-Plug 'ctrlpvim/ctrlp.vim'        "Fuzzy Search
-Plug 'tpope/vim-surround'        "parentheses support
-Plug 'tpope/vim-repeat'          "repeats plugin actions with .
-Plug 'jiangmiao/auto-pairs'      "adds closing brackets
-Plug '/usr/local/opt/fzf'        "fzf fuzzy search
-Plug 'junegunn/fzf.vim'
+" Editor
+Plug 'myusuf3/numbers.vim'             " relative line numbers
+Plug 'scrooloose/nerdtree'             " file tree
+Plug 'bling/vim-airline'               " statusline
+Plug 'tpope/vim-fugitive'              " git integration
+Plug 'tpope/vim-sensible'             " sane defaults
+Plug 'ctrlpvim/ctrlp.vim'             " fuzzy file finder (<C-p>)
+Plug 'tpope/vim-surround'             " surround with brackets/quotes
+Plug 'tpope/vim-repeat'               " repeat plugin actions with .
+Plug 'jiangmiao/auto-pairs'           " auto-close brackets
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " fzf binary
+Plug 'junegunn/fzf.vim'               " fzf vim integration (<Space>f)
 
 " General
-" Plug 'chaoren/vim-wordmotion'                    " sensible word based movement/ disabled because breaking change
-Plug 'tomtom/tcomment_vim'                       " sensible commenting
-Plug 'tommcdo/vim-exchange'                      " word exchange that isn't awful
+Plug 'tomtom/tcomment_vim'            " gcc to toggle comment, gc + motion
+Plug 'tommcdo/vim-exchange'           " exchange two regions with cx
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'sirver/ultisnips'                          "snippet support
-Plug 'machakann/vim-highlightedyank'             "Make the yanked region apparent!
-Plug 'janko-m/vim-test'                          " unified wrapper for running tests
-Plug 'einfachtoll/didyoumean'                    " asks for the right file
-Plug 'jparise/vim-graphql'                      "support for graphql
+Plug 'sirver/ultisnips'               " snippet support
+Plug 'machakann/vim-highlightedyank'  " flash yanked region
+Plug 'janko-m/vim-test'              " unified test runner
+Plug 'einfachtoll/didyoumean'        " suggest correct file on open
 
-" LSP support 
+" LSP support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Misc languages
-" Clojure
-" Plug 'guns/vim-clojure-static', { 'for': 'clojure' } "Clojure runtime files
-" Rust
-"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-" Go
-" Plug 'fatih/vim-go', { 'for': 'golang', 'do': ':GoUpdateBinaries'  }
+" JavaScript / TypeScript
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'jsx'] }
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'jsx', 'typescript', 'typescriptreact'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'jsx'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': ['javascript', 'typescript', 'typescriptreact'] }
 
-" Javascript
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }  "syntax highlighting and improved indentation
-Plug 'jelera/vim-javascript-syntax'                               "syntax highlight
-Plug 'moll/vim-node'
-
-Plug 'maxmellon/vim-jsx-pretty' "syntax highlighting after deprecation of vim-jsx
-Plug 'othree/javascript-libraries-syntax.vim' "syntax for JS libaries
-" Plug 'posva/vim-vue'            "syntax highlighting for vue
-
-" Typescript
-Plug 'leafgarland/typescript-vim' "syntax highlighting
-Plug 'peitalin/vim-jsx-typescript' "syntax highlighting again
+" GraphQL
+Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " Clojure
-" Plug 'kien/rainbow_parentheses.vim' "Colours up parentheses in Clojure repl
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-" Java build tools
-Plug 'bazelbuild/vim-ft-bzl'  "rudimentary Bazel filetype plugin
-" Plug 'google/vim-maktaba'     "required for vim-bazel
-" Plug 'bazelbuild/vim-bazel'   "java/scala build support
-Plug 'derekwyatt/vim-scala'   "scala language support
-
-" Tmux Integration
-Plug 'christoomey/vim-tmux-navigator' "allow sensible pane switching from vim panes to tmux panes
-
-" Template Highlighting and Support
-Plug 'mustache/vim-mustache-handlebars', {'for': ['handlebars', 'hbs']}  "template support 
-Plug 'digitaltoad/vim-pug'
-Plug 'lumiliet/vim-twig'                                                 "twig template support
-Plug 'mattn/emmet-vim'                                                   "emmet support
+" Scala
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 " Terraform
-Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
-" Styled Components
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' } "syntax highlighting
+" Templates
+Plug 'mustache/vim-mustache-handlebars', { 'for': ['handlebars', 'hbs'] }
+Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
+Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+Plug 'mattn/emmet-vim'
+
+" Tmux integration
+Plug 'christoomey/vim-tmux-navigator'
 
 " Themes
 Plug 'w0ng/vim-hybrid'
 Plug 'reedes/vim-colors-pencil'
-Plug 'altercation/vim-colors-solarized' "easy on the eye
+Plug 'altercation/vim-colors-solarized'
 
 " LLM
-Plug 'github/copilot.vim', { 'url': 'git@github.com:github/copilot.vim.git' } "use ssh
+Plug 'github/copilot.vim', { 'url': 'git@github.com:github/copilot.vim.git' }
 
-" Git plugin not hosted on GitHub
-"Plug 'wincent/command-t', {
-" \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-" \ }
-"Plug 'git://git.wincent.com/command-t.git'
 call plug#end()
 
-"==========================================================================
-" COC configuration 
-"==========================================================================
-set cmdheight=2     " give more space to display messages
-set hidden          " TextEdit might fail if this is not set 
-set shortmess+=c    " Don't pass messages to |ins completion menu|
+"============================================================
+"                   ~Appearance~
+"============================================================
 
-" TextEdit might fail if hidden is not set.
-set hidden
+syntax enable
+set background=light
+colorscheme hybrid
 
-" Some servers have issues with backup files, see #649.
-set nobackup
+"============================================================
+"                   ~General Settings~
+"============================================================
+
+set mouse=n               " mouse scroll in normal mode
+set number                " show line numbers
+set laststatus=2          " always show statusline
+set nobackup              " don't create backup files
 set nowritebackup
+set noswapfile
+set nohlsearch            " don't persist search highlight
+set incsearch             " highlight as you type
+set ignorecase            " case-insensitive search
+set pastetoggle=<F9>      " toggle paste mode (disables auto-indent)
+set ruler
+set autoindent
+set tabstop=2
+set scrolloff=4
+set softtabstop=2
+set shiftwidth=2
+set shiftround
+set splitright
+set splitbelow
+set expandtab
+set secure
+set smarttab
+set wrap
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-" Recently vim can merge signcolumn and number column into one
-set signcolumn=number
-else
-set signcolumn=yes
+" Use system clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
 endif
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"     \ pumvisible() ? "\<C-n>" :
-"     \ <SID>check_back_space() ? "\<TAB>" :
-"     \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"==========================================================================
+" CoC — Language Server Protocol (LSP) client
+"
+" CoC connects Vim to language servers (tsserver, eslint, prettier, yaml-ls)
+" which provide completions, go-to-definition, hover docs, diagnostics, code
+" actions, and formatting — similar to what you'd get in VS Code.
+"
+" How it works:
+"   When you open a JS/TS file, CoC starts the tsserver language server in
+"   the background. That server analyses your code and sends back errors,
+"   type info, and completions. CoC surfaces these in Vim.
+"
+" Key mappings:
+"   gd            → go to definition
+"   K             → show docs / type info for symbol under cursor
+"   [g / ]g       → jump to previous / next diagnostic (error or warning)
+"   <Space>rn     → rename symbol under cursor across the project
+"   <Space>fd     → format file with prettier
+"   <Space>ac     → code action at cursor (e.g. add missing import)
+"   <Space>qf     → quick fix on the current line
+"   <Space>ld     → list all diagnostics in a searchable window
+"   <Space>le     → manage installed CoC extensions
+"   <Space>lc     → list available CoC commands
+"   <Space>lr     → resume the last CoC list
+"==========================================================================
 
-function! s:check_back_space() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+set cmdheight=2           " extra space for CoC messages
+set hidden                " allow switching buffers without saving
+set shortmess+=c          " suppress ins-completion-menu messages
+set updatetime=300        " faster diagnostics (default 4000ms feels slow)
 
-" Use <c-space> to trigger completion.
+" Always show the sign column so diagnostics don't shift the text
+if has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Trigger completion manually with <c-space>
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+" <cr> confirms a completion selection; otherwise inserts a newline
 if exists('*complete_info')
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" Navigate diagnostics (errors and warnings reported by the language server)
 nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nnoremap <Space> gd <Plug>(coc-definition)
-nnoremap <Space> gy <Plug>(coc-type-definition)
-nnoremap <Space> gi <Plug>(coc-implementation)
-nnoremap <Space> gr <Plug>(coc-references)
+" Go to definition
+nnoremap <silent> gd <Plug>(coc-definition)
+" nnoremap <silent> gy <Plug>(coc-type-definition)
+" nnoremap <silent> gi <Plug>(coc-implementation)
+" nnoremap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
+" Show documentation or type info for the symbol under the cursor
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -303,39 +272,33 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
+" Highlight all references to the symbol under the cursor when idle
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" Comment highlighting
+
+" Allow // comments in JSON files (used by CoC and tsconfig)
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Symbol renaming.
+" Rename the symbol under the cursor across the project
 nnoremap <Space>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-" xnoremap <Space>f  <Plug>(coc-format-selected)
-" vnoremap <Space>f  <Plug>(coc-format-selected)
-" nnoremap <Space>f  <Plug>(coc-format-selected)
-
 augroup mygroup
-autocmd!
-" Setup formatexpr specified filetype(s).
-autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-" Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `<Space>aap` for current paragraph
+" Code actions — e.g. add missing import, extract to variable
 xnoremap <Space>a  <Plug>(coc-codeaction-selected)
 nnoremap <Space>a  <Plug>(coc-codeaction-selected)
+nnoremap <Space>ac <Plug>(coc-codeaction)
 
-" Remap keys for applying codeAction to the current buffer.
-nnoremap <Space>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nnoremap <Space>qf  <Plug>(coc-fix-current)
+" Quick fix the problem on the current line
+nnoremap <Space>qf <Plug>(coc-fix-current)
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+" Format the current file with prettier
+nnoremap <Space>fd :CocCommand prettier.formatFile<cr>
+
+" Text objects for functions and classes (requires LSP documentSymbol support)
 xnoremap if <Plug>(coc-funcobj-i)
 onoremap if <Plug>(coc-funcobj-i)
 xnoremap af <Plug>(coc-funcobj-a)
@@ -345,93 +308,32 @@ onoremap ic <Plug>(coc-classobj-i)
 xnoremap ac <Plug>(coc-classobj-a)
 onoremap ac <Plug>(coc-classobj-a)
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-" nnoremap <Space> <C-s> <Plug>(coc-range-select)
-" xnoremap <Space> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
+" Commands
 command! -nargs=0 Format :call CocAction('format')
+command! -nargs=? Fold   :call CocAction('fold', <f-args>)
+command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
+" CoC status in the statusline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" CoC lists — all under <Space>l to avoid conflicts
+nnoremap <silent><nowait> <Space>ld :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <Space>le :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <Space>lc :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <Space>lj :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <Space>lk :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <Space>lr :<C-u>CocListResume<CR>
 
-" from thoughtworks doc for auto type info on hover
-" ------------------------------------------------ "
-" function! ShowDocIfNoDiagnostic(timer_id)
-"     if (coc#util#has_float() == 0)
-"           silent call CocActionAsync('doHover')
-"     endif
-" endfunction
-
-" show type information on hover
-" function! s:show_hover_doc()
-"     call timer_start(500, 'ShowDocIfNoDiagnostic')
-" endfunction
-
-
-" autocmd CursorHoldI * :call <SID>show_hover_doc()
-" autocmd CursorHold * :call <SID>show_hover_doc()
-" ------------------------------------------------ "
-
-" Non-plug in settings
-syntax enable
-set background=light
-colorscheme hybrid
-
-"Use system clipboard.
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
+" Load CoC extensions based on what's installed in the current project
+if isdirectory('./node_modules')
+  let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+    \]
+  if isdirectory('./node_modules/prettier')
+    let g:coc_global_extensions += ['coc-prettier']
+  endif
+  if isdirectory('./node_modules/eslint')
+    let g:coc_global_extensions += ['coc-eslint']
+  endif
 endif
-
-set mouse=n               " mouse scroll in normal mode 
-set nocompatible          " be iMproved, required
-set number                " show line numbers
-set laststatus=2          " last window always has a statusline
-set nobackup              " Stops creating swp files (thank goodness)
-set nowritebackup
-set noswapfile
-set nohlsearch            " Don't continue to highlight searched phrases.
-set incsearch             " But do highlight as you type your search.
-set ignorecase            " Make searches case-insensitive.
-set pastetoggle=<F9>      " Using allows paste without auto indent
-set rtp+=/usr/local/opt/fzf " Gets fzf running
-set ruler                 " Always show info along bottom.
-set autoindent            " auto-indent
-set tabstop=2             " tab spacing
-set scrolloff=4           " keep at least 4 lines below the cursor
-set softtabstop=2         " unify
-set shiftwidth=2          " indent/outdent by 2 columns
-set shiftround            " always indent/outdent to the nearest tabstop
-set splitright            " split new files to the right
-set splitbelow            " split new files below
-set expandtab             " use spaces instead of tabs
-set secure                " limit what modelines and autocmds can do
-set smarttab              " use tabs at the start of a line, spaces elsewhere
-set wrap                  " soft wrap
