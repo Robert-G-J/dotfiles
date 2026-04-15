@@ -123,6 +123,7 @@ export PATH
 
 ## 7. Final Initialization (Run ONCE)
 autoload -Uz colors && colors
+setopt PROMPT_SUBST
 
 ## 8. Ensure Ctrl-Z (SIGSTOP) works regardless of plugin interference
 bindkey -e                 # Emacs keybindings on CLI
