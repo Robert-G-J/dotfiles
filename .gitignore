@@ -1,10 +1,10 @@
 # Vim plugin directories (managed by vim-plug, not tracked)
-vim/.vim/plugged/
-vim/.vim/autoload/
-vim/.vim/.netrwhist
+vim/dot-vim/plugged/
+vim/dot-vim/autoload/
+vim/dot-vim/.netrwhist
 
 # Zsh plugins (cloned by bootstrap.sh, not tracked)
-zsh/.zsh/plugins/
+zsh/dot-zsh/plugins/
 
 # Zsh backups
 zsh/*.backup

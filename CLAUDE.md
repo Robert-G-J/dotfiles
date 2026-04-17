@@ -16,15 +16,15 @@ Orchestrates: Xcode CLT → Homebrew → brew bundle → stow symlinks → TPM �
 
 ## Stow Structure
 
-Each top-level directory is a stow "package" mirroring `$HOME`. Running `stow zsh` from `~/dotfiles` creates `~/.zshrc → dotfiles/zsh/.zshrc`, etc.
+Each top-level directory is a stow "package" mirroring `$HOME`. Stow is invoked with `--dotfiles`: files named `dot-*` in the package are symlinked with a leading `.` in `$HOME` (e.g. `dot-zshrc` → `~/.zshrc`). Always pass `--dotfiles` to stow.
 
-| Package | Key files |
+| Package | Key files (repo name → `$HOME` symlink) |
 |---------|-----------|
-| `zsh/`  | `.zshrc`, `.zsh/zsh-functions.zsh`, `.zsh/omz-git.zsh`, `.zsh/completion/` |
-| `vim/`  | `.vimrc`, `.vim/coc-settings.json` |
-| `nvim/` | `.config/nvim/init.vim` (sources vimrc — full Lua migration deferred) |
-| `tmux/` | `.tmux.conf` |
-| `git/`  | `.gitconfig`, `.gitignore_global`, `.gitmessage` |
+| `zsh/`  | `dot-zshrc`, `dot-zsh/zsh-functions.zsh`, `dot-zsh/omz-git.zsh`, `dot-zsh/completion/` |
+| `vim/`  | `dot-vimrc`, `dot-vim/coc-settings.json` |
+| `nvim/` | `dot-config/nvim/init.vim` (sources vimrc — full Lua migration deferred) |
+| `tmux/` | `dot-tmux.conf` |
+| `git/`  | `dot-gitconfig`, `dot-gitignore_global`, `dot-gitmessage` |
 
 Files at repo root (`Brewfile`, `bootstrap.sh`, docs) are not stow packages.
 

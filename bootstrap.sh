@@ -31,7 +31,7 @@ brew bundle --file="$DOTFILES/Brewfile" --no-lock
 echo "==> [4/7] Stow symlinks"
 cd "$DOTFILES"
 for pkg in zsh vim nvim tmux git; do
-  stow -v --restow "$pkg"
+  stow -v --restow --dotfiles "$pkg"
 done
 
 echo "==> [5/7] TPM (tmux plugin manager)"
