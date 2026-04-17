@@ -1,7 +1,0 @@
-Pre-migration symlink state (2026-04-15):
-~/.gitconfig -> ~/dotfiles/git/gitconfig
-~/.tmux.conf -> ~/dotfiles/tmux.conf
-~/.vim -> ~/dotfiles/vim
-~/.vimrc -> ~/dotfiles/vim/vimrc
-~/.zshrc -> ~/dotfiles/zsh/zshrc
-~/.gitignore_global — does not exist
