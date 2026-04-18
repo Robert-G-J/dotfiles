@@ -1,24 +1,39 @@
 [user]
-  name = Robert Jones
-	email = 22344413+Robert-G-J@users.noreply.github.com 
+	name = Robert Jones
+	email = 22344413+Robert-G-J@users.noreply.github.com
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vim
 [alias]
-  bdl = branch -d  # delete local branch
-  ca = commit --amend
-	dbr = push origin --delete # delete remote branch
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # log with pretty format
-	mup = !git checkout master && git pull && git checkout -
-  pl = pull --rebase
-  plom = pl origin main
-  puf = push --force
-	sla = log --oneline --decorate --graph --all # log commits with graphical view
+	# Branch
+	bdl  = branch -d
+	bdf  = branch -D
+	dbr  = push origin --delete
+	# Commit
+	ca   = commit --amend
+	# Push/pull
+	plom = pull origin main
+	puf  = push --force-with-lease
+	# Rebase
+	ri   = rebase -i
+	rc   = rebase --continue
+	ra   = rebase --abort
+	rh   = reset --hard
+	# Cherry-pick
+	pick = cherry-pick
+	# Stash
+	st   = stash
+	stp  = stash pop
+	# Clean
+	wipe = clean -fd
+	# Log
+	ll  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	sla = log --oneline --decorate --graph --all
 [push]
 	default = upstream
 	autoSetupRemote = true
 [pull]
-	rebase = false
+	rebase = true
 [init]
 	defaultBranch = main
 [commit]
