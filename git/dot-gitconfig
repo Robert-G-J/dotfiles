@@ -12,6 +12,7 @@
 	# Commit
 	ca   = commit --amend
 	# Push/pull
+	gpu  = push
 	plom = pull origin main
 	puf  = push --force-with-lease
 	# Rebase
