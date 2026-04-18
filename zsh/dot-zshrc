@@ -44,7 +44,7 @@ alias pip="echo 'Use uv instead of pip to keep your Mac clean. Running: uv pip';
 alias pip-install="echo 'Installing via uv...'; uv pip install" # Prevent accidental global pip installs by routing to uv
 alias tree='tree -C -I "*~|*#|node_modules|sprockets" && echo "Tree excluding node_modules"'
 alias brewup="brew update && brew upgrade && brew cleanup"
-alias gs='git status' gp='git pull' ga='git add' gd='git diff'
+alias gs='git status' gp='git pull' gpu='git push' ga='git add' gd='git diff'
 alias gcm='git commit -m' gc='git commit' goto='git checkout'
 alias zp='vim ~/.zshrc' zpr='exec zsh'
 alias k='kubectl' kcx='kubectx' mk='minikube' tn='tmux new -f'
