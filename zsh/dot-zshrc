@@ -133,3 +133,6 @@ stty susp ^Z               # Terminal must honor the suspend signal
 
 # Claude Code
 export MAX_MCP_OUTPUT_TOKENS=100000
+
+# Shell load confirmation
+echo "⚡ zsh ready in ${SECONDS}s"
