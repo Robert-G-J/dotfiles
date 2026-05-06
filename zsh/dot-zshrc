@@ -49,6 +49,7 @@ alias gcm='git commit -m' gc='git commit' goto='git checkout'
 alias zp='vim ~/.zshrc' zpr='exec zsh'
 alias k='kubectl' kcx='kubectx' mk='minikube' tn='tmux new -f' clc='claude'
 alias update-plugins='for d in ~/.zsh/plugins/*/; do git -C "$d" pull; done'
+alias pn='pnpm' pni='pnpm install'
 
 ## 4. Plugins (cloned by bootstrap.sh into ~/.zsh/plugins/)
 PLUGINS="$HOME/.zsh/plugins"
