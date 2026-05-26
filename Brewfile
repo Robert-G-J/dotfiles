@@ -2,45 +2,105 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 tap 'homebrew/services'
+tap 'bearer/tap'
+tap 'derailed/k9s'
+tap 'int128/kubelogin'
 
-# Java: install via SDKMAN (https://sdkman.io) or 'brew install --cask temurin'
+# Java: install via SDKMAN (https://sdkman.io) or use temurin@17 cask below
 
-# CLI tools
+# Shell / core tools
 brew 'fzf'
-brew 'gh'
-brew 'kubectl'
-brew 'kubernetes-helm'
-brew 'lazygit'
-brew 'neovim'
-brew 'node'
-brew 'nvm'
-brew 'postgresql'
+brew 'fd'
 brew 'ripgrep'
-brew 'scala'
-brew 'stow'
-brew 'tmux'
 brew 'tree'
-brew 'vim'
+brew 'watch'
 brew 'wget'
 brew 'z'
 brew 'zsh'
+brew 'stow'
+brew 'tmux'
+brew 'reattach-to-user-namespace'
+brew 'pngpaste'
+brew 'tlrc'
+
+# Git
+brew 'gh'
+brew 'lazygit'
+brew 'git-filter-repo'
+brew 'git-standup'
+brew 'adr-tools'
+
+# Editors
+brew 'vim'
+brew 'neovim'
+
+# JavaScript / Node
+brew 'nvm'
+brew 'pnpm'
+
+# Python
+brew 'uv'
+
+# Scala / JVM
+brew 'scala'
+brew 'sbt'
+brew 'coursier'
+
+# Cloud / infra
+brew 'awscli'
+brew 'terraform'
+brew 'kubectl'
+brew 'helm'
+brew 'int128/kubelogin/kubelogin'
+brew 'kubeseal'
+brew 'derailed/k9s/k9s'
+
+# Data / DB
+brew 'postgresql@14'
+brew 'pgcli'
+brew 'pgweb'
+brew 'kafka'
+brew 'kcat'
+brew 'flyway'
+
+# JSON / YAML
+brew 'jq'
+brew 'yq'
+
+# Dev tools
+brew 'lazydocker'
+brew 'bearer/tap/bearer'
+brew 'mas'
 
 # Apps
-cask 'docker'
-cask 'google-cloud-sdk'
+cask '1password-cli'
+cask 'brave-browser'
+cask 'caffeine'
+cask 'claude-code'
+cask 'gcloud-cli'
 cask 'iterm2'
 cask 'jetbrains-toolbox'
-cask 'postman'
+cask 'keycastr'
+cask 'muzzle'
+cask 'obsidian'
+cask 'orbstack'
+cask 'raycast'
+cask 'rectangle'
 cask 'slack'
 cask 'spotify'
+cask 'superduper'
+cask 'temurin@17'
 cask 'the-unarchiver'
-cask 'vlc'
 cask 'visual-studio-code'
+cask 'vlc'
+cask 'whatsapp'
 
 # Fonts
 cask 'font-fira-code'
 cask 'font-hasklig'
 cask 'font-jetbrains-mono'
+cask 'font-jetbrains-mono-nerd-font'
 cask 'font-lato'
 cask 'font-roboto'
 cask 'font-roboto-condensed'
+cask 'font-roboto-mono-nerd-font'
