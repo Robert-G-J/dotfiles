@@ -1,7 +1,5 @@
 cask_args appdir: '/Applications'
 
-tap 'homebrew/bundle'
-tap 'homebrew/services'
 tap 'bearer/tap'
 tap 'derailed/k9s'
 tap 'int128/kubelogin'
