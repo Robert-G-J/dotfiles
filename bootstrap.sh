@@ -26,7 +26,7 @@ fi
 echo "    OK"
 
 echo "==> [3/7] Brew Bundle"
-brew bundle --file="$DOTFILES/Brewfile" --no-lock
+brew bundle --file="$DOTFILES/Brewfile"
 
 echo "==> [4/7] Stow symlinks"
 cd "$DOTFILES"
