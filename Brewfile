@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 tap 'bearer/tap'
 tap 'derailed/k9s'
 tap 'int128/kubelogin'
+tap 'hashicorp/tap'
 
 # Java: install via SDKMAN (https://sdkman.io) or use temurin@17 cask below
 
@@ -46,7 +47,7 @@ brew 'coursier'
 
 # Cloud / infra
 brew 'awscli'
-brew 'terraform'
+brew 'hashicorp/tap/terraform'
 brew 'kubectl'
 brew 'helm'
 brew 'int128/kubelogin/kubelogin'
