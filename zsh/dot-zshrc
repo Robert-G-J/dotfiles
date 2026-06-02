@@ -11,6 +11,8 @@ if /usr/libexec/java_home -v 11 &>/dev/null; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 fi
 export NVM_DIR="$HOME/.nvm"
+export EDITOR="vim"
+export VISUAL="vim"
 export LESS="-XFR"
 export FZF_DEFAULT_COMMAND='rg'
 export CLOUDSDK_PYTHON="${HOMEBREW_PREFIX}/bin/python3"

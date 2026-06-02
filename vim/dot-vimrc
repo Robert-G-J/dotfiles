@@ -97,10 +97,10 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Editor
-Plug 'myusuf3/numbers.vim'             " relative line numbers
-Plug 'scrooloose/nerdtree'             " file tree
-Plug 'bling/vim-airline'               " statusline
-Plug 'tpope/vim-fugitive'              " git integration
+Plug 'scrooloose/nerdtree'            " file tree
+Plug 'bling/vim-airline'              " statusline
+Plug 'tpope/vim-fugitive'             " git integration
+Plug 'tpope/vim-rhubarb'              " GBrowse handling
 Plug 'tpope/vim-sensible'             " sane defaults
 Plug 'ctrlpvim/ctrlp.vim'             " fuzzy file finder (<C-p>)
 Plug 'tpope/vim-surround'             " surround with brackets/quotes
@@ -185,6 +185,7 @@ set incsearch             " highlight as you type
 set ignorecase            " case-insensitive search
 set pastetoggle=<F9>      " toggle paste mode (disables auto-indent)
 set ruler
+set relativenumber
 set autoindent
 set tabstop=2
 set scrolloff=4
