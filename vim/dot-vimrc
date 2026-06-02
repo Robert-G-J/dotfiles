@@ -39,8 +39,16 @@ nnoremap <Space>nf :NERDTreeFind<cr>
 " <C-p>     → fzf: find files by name
 " <Space>f  → fzf ripgrep: search text across files
 nnoremap <silent> <C-p> :Files<cr>
-nnoremap <silent> <Space>f :Rg<cr>
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+nnoremap <silent> <Space>fi :Rg<cr>
+function! RipgrepFzf(query, fullscreen)
+  let fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let spec = fzf#vim#with_preview(
+    \ {'options': ['--disabled', '--query', a:query, '--delimiter', ':', '--nth', '4..',
+    \              '--bind', 'change:reload:'.printf(fmt, '{q}')]},
+    \ 'right:50%')
+  call fzf#vim#grep(printf(fmt, shellescape(a:query)), 1, spec, a:fullscreen)
+endfunction
+command! -bang -nargs=* Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " Paste last yank (register 0, unaffected by deletes)
 nnoremap <Space>p "0P
@@ -64,6 +72,7 @@ let NERDTreeShowHidden = 1
 
 " fzf — bottom split, similar feel to CtrlP
 let g:fzf_layout = { 'down': '~30%' }
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!{.git,node_modules,dist,build,.next,.bloop}"'
 
 " Emmet — only in node projects
 if isdirectory('./node_modules')
