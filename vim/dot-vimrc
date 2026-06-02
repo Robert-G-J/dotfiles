@@ -36,8 +36,9 @@ nnoremap <Space>nt :NERDTree<cr>
 nnoremap <Space>nf :NERDTreeFind<cr>
 
 " Search
-" <C-p>     → CtrlP: find files by name
+" <C-p>     → fzf: find files by name
 " <Space>f  → fzf ripgrep: search text across files
+nnoremap <silent> <C-p> :Files<cr>
 nnoremap <silent> <Space>f :Rg<cr>
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
@@ -64,15 +65,8 @@ autocmd InsertLeave * silent! update
 " NERDTree
 let NERDTreeShowHidden = 1
 
-" CtrlP — file finder on <C-p>
-let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/](node_modules\|dist\|build)|\.(git|hg|svn|next|node_modules|bloop)$',
-\ 'file': '\v\.(exe|so|dll|DS_Store)$',
-\ }
-let g:ctrlp_dont_split = 'NERD'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 'rwa'
-let g:ctrlp_user_command = 'rg %s --files --hidden --follow --glob "!{.git,node_modules,dist,build,.next,.bloop}"'
+" fzf — bottom split, similar feel to CtrlP
+let g:fzf_layout = { 'down': '~30%' }
 
 " Emmet — only in node projects
 if isdirectory('./node_modules')
@@ -102,7 +96,6 @@ Plug 'bling/vim-airline'              " statusline
 Plug 'tpope/vim-fugitive'             " git integration
 Plug 'tpope/vim-rhubarb'              " GBrowse handling
 Plug 'tpope/vim-sensible'             " sane defaults
-Plug 'ctrlpvim/ctrlp.vim'             " fuzzy file finder (<C-p>)
 Plug 'tpope/vim-surround'             " surround with brackets/quotes
 Plug 'tpope/vim-repeat'               " repeat plugin actions with .
 Plug 'jiangmiao/auto-pairs'           " auto-close brackets
