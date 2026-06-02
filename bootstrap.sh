@@ -28,6 +28,24 @@ echo "    OK"
 echo "==> [3/7] Brew Bundle"
 brew bundle --file="$DOTFILES/Brewfile"
 
+echo "==> [3.5/7] NVM — install Node LTS"
+export NVM_DIR="$HOME/.nvm"
+mkdir -p "$NVM_DIR"
+# nvm is installed by Homebrew; source it directly here (not via the lazy-loader)
+if [ -s "${BREW_PREFIX}/opt/nvm/nvm.sh" ]; then
+  . "${BREW_PREFIX}/opt/nvm/nvm.sh"
+  if ! nvm ls --no-colors 2>/dev/null | grep -qE '^\s*v[0-9]'; then
+    nvm install --lts
+    nvm alias default 'lts/*'
+    echo "    Node LTS installed"
+  else
+    echo "    OK (Node LTS already installed)"
+  fi
+else
+  echo "ERROR: nvm not found at ${BREW_PREFIX}/opt/nvm — did brew bundle succeed?" >&2
+  exit 1
+fi
+
 echo "==> [4/7] Stow symlinks"
 cd "$DOTFILES"
 for pkg in zsh vim nvim tmux git; do

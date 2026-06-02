@@ -10,7 +10,6 @@ eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 if /usr/libexec/java_home -v 11 &>/dev/null; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 fi
-export NVM_DIR="$HOME/.nvm"
 export EDITOR="vim"
 export VISUAL="vim"
 export LESS="-XFR"
@@ -64,8 +63,8 @@ fpath=($PLUGINS/pure $PLUGINS/zsh-completions/src $fpath)
 ## 5. Lazy-Load NVM (Huge speed boost)
 lazy_nvm() {
   unset -f nvm node npm npx pnpm
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && . "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
+  [ -s "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm" ] && . "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
   "$@"
 }
 nvm() { lazy_nvm nvm "$@"; }
