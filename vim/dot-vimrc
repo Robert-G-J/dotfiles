@@ -45,9 +45,6 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 " Paste last yank (register 0, unaffected by deletes)
 nnoremap <Space>p "0P
 
-" Run tests
-nnoremap <Space>t :!yarn test<cr>
-
 " Move by visible lines when text is wrapped
 nnoremap j gj
 nnoremap k gk
@@ -116,9 +113,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " JavaScript / TypeScript
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
-Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'jsx'] }
 Plug 'moll/vim-node', { 'for': 'javascript' }
-Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'jsx', 'typescript', 'typescriptreact'] }
+" Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'jsx', 'typescript', 'typescriptreact'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'jsx'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
