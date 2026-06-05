@@ -7,11 +7,6 @@
       "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
-    },
-    "metals": {
-      "command": "metals",
-      "rootPatterns": ["build.sbt"],
-      "filetypes": ["scala", "sbt"]
     }
   }
 }
