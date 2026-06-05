@@ -115,10 +115,12 @@ typeset -U path
 
 # # Set the priority order
 path=(
+  $HOME/.local/bin
   ${HOMEBREW_PREFIX}/bin
   ${HOMEBREW_PREFIX}/sbin
   $HOME/google-cloud-sdk/bin
   $HOME/.orbstack/bin
+  "$HOME/Library/Application Support/Coursier/bin"
   $path
   )
 export PATH

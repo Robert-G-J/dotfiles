@@ -258,6 +258,7 @@ set updatetime=300        " faster diagnostics (default 4000ms feels slow)
 
 " Point coc.nvim at the real node binary via NVM — shell functions aren't visible to vim
 let g:coc_node_path = trim(system('source ' . $HOMEBREW_PREFIX . '/opt/nvm/nvm.sh && nvm which default 2>/dev/null'))
+let g:coc_npm_path = fnamemodify(g:coc_node_path, ':h') . '/npm'
 
 " Always show the sign column so diagnostics don't shift the text
 if has("patch-8.1.1564")
