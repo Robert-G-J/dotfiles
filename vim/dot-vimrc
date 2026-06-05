@@ -170,8 +170,26 @@ call plug#end()
 "============================================================
 
 syntax enable
-set background=light
-colorscheme hybrid
+
+" Colourschemes to use in each mode — change these to swap themes
+let g:theme_light = 'hybrid'
+let g:theme_dark  = 'hybrid'
+
+" Reads macOS system appearance and applies the matching colourscheme.
+" Called at startup and whenever vim regains focus, so the theme stays
+" in sync after the machine sleeps or the user switches appearance.
+function! s:ApplySystemTheme() abort
+  if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~? 'dark'
+    set background=dark
+    execute 'colorscheme ' . g:theme_dark
+  else
+    set background=light
+    execute 'colorscheme ' . g:theme_light
+  endif
+endfunction
+
+autocmd VimEnter,FocusGained * call s:ApplySystemTheme()
+call s:ApplySystemTheme()
 
 "============================================================
 "                   ~General Settings~
