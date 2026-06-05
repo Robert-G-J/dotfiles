@@ -60,6 +60,11 @@ nnoremap k gk
 " Escape from insert mode
 inoremap jj <Esc>
 
+" Make hash accessible from key
+inoremap £ #
+nnoremap £ #
+vnoremap £ #
+
 " Save on leaving insert mode
 autocmd InsertLeave * silent! update
 
