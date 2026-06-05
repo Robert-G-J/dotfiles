@@ -7,8 +7,8 @@ fi
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 
 ## 1. Environment & FPATH
-if /usr/libexec/java_home -v 11 &>/dev/null; then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+if /usr/libexec/java_home -v 21 &>/dev/null; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 fi
 export EDITOR="vim"
 export VISUAL="vim"
