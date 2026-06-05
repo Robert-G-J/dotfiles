@@ -48,6 +48,7 @@ brew 'coursier'
 # Cloud / infra
 brew 'awscli'
 brew 'hashicorp/tap/terraform'
+brew 'hashicorp/tap/terraform-ls'
 brew 'kubectl'
 brew 'helm'
 brew 'int128/kubelogin/kubelogin'

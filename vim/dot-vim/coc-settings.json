@@ -3,12 +3,13 @@
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "languageserver": {
     "terraform": {
-      "command": "terraform-lsp",
+      "command": "terraform-ls",
+      "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
     },
     "metals": {
-      "command": "metals-vim",
+      "command": "metals",
       "rootPatterns": ["build.sbt"],
       "filetypes": ["scala", "sbt"]
     }
