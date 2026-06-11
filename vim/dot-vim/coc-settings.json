@@ -1,12 +1,22 @@
 {
   "prettier.disableSuccessMessage": true,
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  // no-unsafe-* rules fire across hundreds of files in this repo — suppress in CoC only; CI and the real eslint config are unaffected
+  "eslint.rules.customizations": [
+    { "rule": "@typescript-eslint/no-unsafe-*", "severity": "off" }
+  ],
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
       "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
+    },
+    "graphql": {
+      "command": "node",
+      "args": ["~/.vim/graphql-lsp-server.js"],
+      "filetypes": ["graphql", "gql"],
+      "rootPatterns": ["graphql.config.*", ".graphqlrc*", "package.json"]
     }
   }
 }

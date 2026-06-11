@@ -37,9 +37,11 @@ nnoremap <Space>nf :NERDTreeFind<cr>
 
 " Search
 " <C-p>     → fzf: find files by name
-" <Space>f  → fzf ripgrep: search text across files
+" <Space>fi → fzf ripgrep: search text across files
+" <Space>fw → fzf ripgrep: search word under cursor
 nnoremap <silent> <C-p> :Files<cr>
 nnoremap <silent> <Space>fi :Rg<cr>
+nnoremap <Space>fw :Rg <C-r><C-w><cr>
 function! RipgrepFzf(query, fullscreen)
   let fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let spec = fzf#vim#with_preview(
@@ -283,9 +285,9 @@ nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Go to definition
 nnoremap <silent> gd <Plug>(coc-definition)
-" nnoremap <silent> gy <Plug>(coc-type-definition)
-" nnoremap <silent> gi <Plug>(coc-implementation)
-" nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
 
 " Show documentation or type info for the symbol under the cursor
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -340,7 +342,7 @@ command! -nargs=? Fold   :call CocAction('fold', <f-args>)
 command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " CoC status in the statusline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " CoC lists — all under <Space>l to avoid conflicts
 nnoremap <silent><nowait> <Space>ld :<C-u>CocList diagnostics<cr>
