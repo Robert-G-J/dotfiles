@@ -77,6 +77,7 @@ pnpm() { lazy_nvm pnpm "$@"; }
 # Load Z
 [ -f "${HOMEBREW_PREFIX}/etc/profile.d/z.sh" ] && . "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 
+
 # Google Cloud SDK
 alias load-gcloud='source "$HOME/google-cloud-sdk/path.zsh.inc" && source "$HOME/google-cloud-sdk/completion.zsh.inc"'
 
@@ -116,6 +117,7 @@ typeset -U path
 # # Set the priority order
 path=(
   $HOME/.local/bin
+  $HOME/code/scripts
   ${HOMEBREW_PREFIX}/bin
   ${HOMEBREW_PREFIX}/sbin
   $HOME/google-cloud-sdk/bin
