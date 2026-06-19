@@ -47,7 +47,7 @@ brew 'coursier'
 
 # Cloud / infra
 brew 'awscli'
-brew 'hashicorp/tap/terraform'
+brew 'asdf'
 brew 'hashicorp/tap/terraform-ls'
 brew 'kubectl'
 brew 'helm'

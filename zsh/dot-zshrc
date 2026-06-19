@@ -125,6 +125,9 @@ path=(
   )
 export PATH
 
+# asdf version manager (must be after PATH is set)
+export PATH="${HOME}/.asdf/shims:${PATH}"
+
 ## 7. Final Initialization (Run ONCE)
 autoload -Uz colors && colors
 setopt PROMPT_SUBST
