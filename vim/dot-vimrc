@@ -9,7 +9,6 @@
 
 set nocompatible          " must be first — disables Vi compatibility
 
-filetype plugin indent on " enable filetype detection, plugins, and indentation
 runtime macros/matchit.vim " jump between matching html/xml tags with %
 
 au BufNewFile,BufRead *.ejs set filetype=html " html syntax highlighting for EJS
