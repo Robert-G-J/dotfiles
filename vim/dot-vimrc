@@ -138,9 +138,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': ['jav
 " GraphQL
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
-" Clojure
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
