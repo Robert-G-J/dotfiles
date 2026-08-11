@@ -14,3 +14,6 @@ zsh/*.backup
 
 # Symlink backup (pre-migration reference)
 symlinks_backup.txt
+
+# Vim tooling practice files (disposable, not part of the dotfiles)
+vim-dojo/

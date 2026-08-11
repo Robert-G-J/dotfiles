@@ -37,7 +37,7 @@ nnoremap <Space>nf :NERDTreeFind<cr>
 " Search
 " <C-p>     → fzf: find files by name
 " <Space>fi → fzf ripgrep: search text across files
-" <Space>fw → fzf ripgrep: search word under cursor
+" <Space>fw → fzf ripgrep: search word under cursor (or visual selection, e.g. viW then <Space>fw)
 nnoremap <silent> <C-p> :Files<cr>
 nnoremap <silent> <Space>fi :Rg<cr>
 nnoremap <Space>fw :Rg <C-r><C-w><cr>
@@ -50,6 +50,16 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(printf(fmt, shellescape(a:query)), 1, spec, a:fullscreen)
 endfunction
 command! -bang -nargs=* Rg call RipgrepFzf(<q-args>, <bang>0)
+
+" Visual-mode variant: search whatever is selected (e.g. select a compound
+" identifier like foo:bar-baz with viW, since ':' and '-' aren't iskeyword chars)
+function! RipgrepFzfVisual()
+  let saved_reg = @v
+  normal! gv"vy
+  call RipgrepFzf(@v, 0)
+  let @v = saved_reg
+endfunction
+xnoremap <silent> <Space>fw :<C-u>call RipgrepFzfVisual()<cr>
 
 " Paste last yank (register 0, unaffected by deletes)
 nnoremap <Space>p "0P
@@ -207,9 +217,10 @@ set ruler
 set relativenumber
 set autoindent
 set tabstop=2
-set scrolloff=4
 set softtabstop=2
 set shiftwidth=2
+set scrolloff=4
+set expandtab
 set shiftround
 set splitright
 set splitbelow
@@ -275,15 +286,27 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" NOTE: <Plug>(...) mappings MUST use map/nmap/xmap/omap, never the *noremap
+" variants. <Plug> is an indirection that has to be re-expanded; with noremap
+" the RHS is fed to the buffer as literal keystrokes instead (which silently
+" mangles text, as "(c" starts a change operator).
+
 " Navigate diagnostics (errors and warnings reported by the language server)
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Go to definition
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Keep gr for coc references. ReplaceWithRegister's plugin file loads after
+" this vimrc and claims gr/grr unless something is already mapped to its
+" <Plug> targets — its guard tests hasmapto(<Plug>...), not whether gr is free.
+nmap <Space>gr <Plug>ReplaceWithRegisterOperator
+nmap <Space>gR <Plug>ReplaceWithRegisterLine
+xmap <Space>gr <Plug>ReplaceWithRegisterVisual
 
 " Show documentation or type info for the symbol under the cursor
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -303,7 +326,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Rename the symbol under the cursor across the project
-nnoremap <Space>rn <Plug>(coc-rename)
+nmap <Space>rn <Plug>(coc-rename)
 
 augroup mygroup
   autocmd!
@@ -312,25 +335,27 @@ augroup mygroup
 augroup end
 
 " Code actions — e.g. add missing import, extract to variable
-xnoremap <Space>a  <Plug>(coc-codeaction-selected)
-nnoremap <Space>a  <Plug>(coc-codeaction-selected)
-nnoremap <Space>ac <Plug>(coc-codeaction)
+xmap <Space>a  <Plug>(coc-codeaction-selected)
+nmap <Space>a  <Plug>(coc-codeaction-selected)
+nmap <Space>ac <Plug>(coc-codeaction)
 
 " Quick fix the problem on the current line
-nnoremap <Space>qf <Plug>(coc-fix-current)
+nmap <Space>qf <Plug>(coc-fix-current)
 
 " Format the current file with prettier
 nnoremap <Space>fd :CocCommand prettier.formatFile<cr>
 
 " Text objects for functions and classes (requires LSP documentSymbol support)
-xnoremap if <Plug>(coc-funcobj-i)
-onoremap if <Plug>(coc-funcobj-i)
-xnoremap af <Plug>(coc-funcobj-a)
-onoremap af <Plug>(coc-funcobj-a)
-xnoremap ic <Plug>(coc-classobj-i)
-onoremap ic <Plug>(coc-classobj-i)
-xnoremap ac <Plug>(coc-classobj-a)
-onoremap ac <Plug>(coc-classobj-a)
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+" NOTE: ic/ac still lose to tcomment_vim's inner/a-comment objects, which are
+" defined after this vimrc runs. Unresolved — see the class-object decision.
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Commands
 command! -nargs=0 Format :call CocAction('format')
@@ -341,6 +366,11 @@ command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeIm
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " CoC lists — all under <Space>l to avoid conflicts
+" NOTE: these are :CocList Ex commands, not <Plug> targets, so nnoremap is correct.
+" <Space>ls is the fastest way to reach a symbol in a large monorepo — fuzzy,
+" workspace-wide and type-aware, so it beats ripgrep for anything named.
+nnoremap <silent><nowait> <Space>ls :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <Space>lo :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <Space>ld :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <Space>le :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <Space>lc :<C-u>CocList commands<cr>
