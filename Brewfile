@@ -56,7 +56,7 @@ brew 'kubeseal'
 brew 'derailed/k9s/k9s'
 
 # Data / DB
-brew 'postgresql@14'
+brew 'postgresql'
 brew 'pgcli'
 brew 'pgweb'
 brew 'kafka'
